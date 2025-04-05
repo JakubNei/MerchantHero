@@ -48,7 +48,7 @@ public class Killable : MonoBehaviour
                     b.transform.position = (p + lastPositonWhenDead) / 2;
                     b.transform.eulerAngles = new Vector3(0, 0, a);
                     var s = b.transform.localScale;
-                    s *= Mathf.Lerp(0.05f, 0.3f, bloodLeft / (float)bloodMax);
+                    s *= Mathf.Lerp(0.1f, 0.3f, bloodLeft / (float)bloodMax);
                     s.y = d * 2;
                     b.transform.localScale = s;
                 }

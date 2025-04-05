@@ -8,10 +8,9 @@ using UnityEngine;
 public class Merchant : MonoBehaviour
 {
     public static Merchant I => FindAnyObjectByType<Merchant>();
-    public bool movingCart = false;
+    public Cart movingCart;
     public Sword sword;
 
-    Cart cart;
     Vector3 offsetFromCart;
 
     void Start()
@@ -62,89 +61,110 @@ public class Merchant : MonoBehaviour
             Input.GetKey(KeyCode.Return);
 
         var canCarry = GetComponent<CanCarry>();
+
+        var bounds = GetBounds();
+        var overlaps = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0);
+
+        Cart couldMoveCart = null;
+        if (!movingCart && !canCarry.IsCarryingAnything)
+        {
+            foreach (var c in overlaps)
+            {
+                Transform p = c.transform;
+                while (p.parent)
+                    p = p.parent;
+                var cart = p.GetComponent<Cart>();
+                if (cart && cart.canBeMoved)
+                {
+                    couldMoveCart = cart;
+                    break;
+                }
+            }
+        }
+
+        Carryable couldCarry = null;
+        if (!movingCart && !canCarry.IsCarryingAnything)
+        {
+            foreach (var c in overlaps)
+            {
+                Transform p = c.transform;
+                while (p.parent)
+                    p = p.parent;
+                var carryable = p.GetComponent<Carryable>();
+                if (carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
+                {
+                    couldCarry = carryable;
+
+                    break;
+                }
+            }
+        }
+
+        if (couldMoveCart)
+        {
+            HighlightSprite.Highlight(couldMoveCart.gameObject);
+        }
+        else if (couldCarry)
+        {
+            HighlightSprite.Highlight(couldCarry.gameObject);            
+        }
+
         if (wantsToMoveCartOrCarry)
-        {
-            var bounds = GetBounds();
-            var overlaps = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0);
-            if (!movingCart && !canCarry.IsCarryingAnything)
             {
-                foreach (var c in overlaps)
+                if (couldMoveCart)
                 {
-                    Transform p = c.transform;
-                    while (p.parent)
-                        p = p.parent;
-                    cart = p.GetComponent<Cart>();
-                    if (cart && cart.canBeMoved)
+                    couldMoveCart.wantsToMoveForward = true;
+                    movingCart = couldMoveCart;
+                }
+                else if (couldCarry)
+                {
+                    couldCarry.price += 1; // increase price so devils are more likely to steal it
+                    canCarry.ForceStartCarrying(couldCarry);
+                    couldCarry.wasEverPickedByPlayer = true;
+                }
+            }
+            else
+            {
+                if (canCarry.IsCarryingAnything)
+                {
+                    var addToCart = new List<Carryable>();
+                    foreach (var c in canCarry.carrying)
                     {
-                        cart.wantsToMoveForward = true;
-                        movingCart = true;
-                        //offsetFromCart
-                        break;
+                        if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
+                        {
+                            addToCart.Add(c);
+                        }
                     }
-                }
-            }
-
-            if (!movingCart && !canCarry.IsCarryingAnything)
-            {
-                foreach (var c in overlaps)
-                {
-                    Transform p = c.transform;
-                    while (p.parent)
-                        p = p.parent;
-                    var carryable = p.GetComponent<Carryable>();
-                    if (carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
+                    foreach (var c in addToCart)
                     {
-                        carryable.price += 1; // increase price so devils are more likely to steal it
-                        canCarry.ForceStartCarrying(carryable);
-                        carryable.wasEverPickedByPlayer = true;
-                        break;
+                        c.price += 1; // increase price so devils are more likely to steal it
+                        Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
+                        c.wasEverInCart = true;
                     }
+                    canCarry.StopCarrying();
                 }
-            }
 
-        }
-        else
-        {
-            if (canCarry.IsCarryingAnything)
-            {
-                var addToCart = new List<Carryable>();
-                foreach (var c in canCarry.carrying)
+                if (movingCart)
                 {
-                    if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
-                    {
-                        addToCart.Add(c);
-                    }
+                    movingCart.wantsToMoveForward = false;
+                    movingCart = null;
                 }
-                foreach (var c in addToCart)
-                {
-                    c.price += 1; // increase price so devils are more likely to steal it
-                    Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
-                    c.wasEverInCart = true;
-                }
-                canCarry.StopCarrying();
             }
-
-            if (movingCart)
-            {
-                cart.wantsToMoveForward = false;
-                movingCart = false;
-            }
-        }
 
 
         if (sword)
             sword.Slash(wanrsToSlash);
 
         if (movingCart)
-            this.transform.position = cart.forceDrageerPosition.position;
+            this.transform.position = movingCart.forceDrageerPosition.position;
 
-        if (movingCart && !cart.canBeMoved)
+        if (movingCart && !movingCart.canBeMoved)
         {
-            cart.wantsToMoveForward = false;
-            movingCart = false;
+            movingCart.wantsToMoveForward = false;
+            movingCart = null;
         }
 
-    Vector3 movementVector = Vector3.zero;
+        Vector3 movementVector = Vector3.zero;
         movementVector.x += Input.GetAxis("Horizontal");
         movementVector.y += Input.GetAxis("Vertical");
 
