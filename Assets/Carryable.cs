@@ -18,6 +18,12 @@ public class Carryable : MonoBehaviour
             if (k)
                 k.onDead += () => { canBeCarried = true; };
         }
+
+        var s = this.transform.localScale;
+        s.x *= Random.Range(0.99f, 1.01f);
+        s.y *= Random.Range(0.99f, 1.01f);
+        s.z *= Random.Range(0.99f, 1.01f);
+        this.transform.localScale = s;
     }
 
     // Update is called once per frame
