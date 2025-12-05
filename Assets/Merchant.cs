@@ -102,11 +102,11 @@ public class Merchant : MonoBehaviour
 
         if (couldMoveCart)
         {
-            HighlightSprite.Highlight(couldMoveCart.gameObject);
+            //HighlightSprite.Highlight(couldMoveCart.gameObject);
         }
         else if (couldCarry)
         {
-            HighlightSprite.Highlight(couldCarry.gameObject);            
+            //HighlightSprite.Highlight(couldCarry.gameObject);            
         }
 
         if (wantsToMoveCartOrCarry)

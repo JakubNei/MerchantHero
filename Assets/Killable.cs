@@ -6,6 +6,7 @@ public class Killable : MonoBehaviour
 {
     public GameObject poseDefailt;
     public GameObject poseDead;
+    public GameObject spawnOnBloodSpill;
 
     public bool autoDieOnSpawn = false;
 
@@ -61,6 +62,8 @@ public class Killable : MonoBehaviour
 
     public void OnHitFrom(Vector3 fromPosition)
     {
+        Sounds.PlayAudioAtLocation(transform, "Sounds/Hit/Flesh", 0.2f);
+
         timesHitBySomething++;
 
         if (!isDead)
@@ -85,8 +88,7 @@ public class Killable : MonoBehaviour
         {
             SpawnBloodScaledByHitCount();
         }
-
-        if (onGotHit != null)
+         if (onGotHit != null)
             onGotHit();
     }
 
@@ -98,6 +100,8 @@ public class Killable : MonoBehaviour
         var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, 1 * m * 0.05f);
+        if (spawnOnBloodSpill)
+            GameObject.Instantiate(spawnOnBloodSpill, bounds.center, Quaternion.identity);
         return b;
     }
     GameObject SpawnBloodScaledByHitCount()
@@ -108,6 +112,8 @@ public class Killable : MonoBehaviour
         var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, (1 + Mathf.Min(10, timesHitBySomething)) * m * 0.05f);
+        if (spawnOnBloodSpill)
+            GameObject.Instantiate(spawnOnBloodSpill, bounds.center, Quaternion.identity);
         return b;
     }
 

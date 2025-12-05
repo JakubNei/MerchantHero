@@ -26,6 +26,7 @@ public class EndSequencce : MonoBehaviour
             if (cart.transform.position.y > this.transform.position.y)
             {
                 endSequcneStarted = true;
+                Sounds.PlayAudio("Sounds/Win");
                 itemsToMove = cart.GetComponentsInChildren<Carryable>().ToList();
                 cart.GetComponent<CanCarry>().StopCarrying();
                 foreach (var i in itemsToMove)
