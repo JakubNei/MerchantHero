@@ -1,0 +1,1037 @@
+fileFormatVersion: 2
+guid: 829e506f141c79948b4431f4d3fd4aa3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7103227228425913906
+    second: cardsLarge_tilemap2 (1)_0
+  - first:
+      213: -7722600162642680531
+    second: cardsLarge_tilemap2 (1)_1
+  - first:
+      213: -207306042723384144
+    second: cardsLarge_tilemap2 (1)_2
+  - first:
+      213: -6980887247842070231
+    second: cardsLarge_tilemap2 (1)_3
+  - first:
+      213: -3718142661272812741
+    second: cardsLarge_tilemap2 (1)_4
+  - first:
+      213: 8318206312123381802
+    second: cardsLarge_tilemap2 (1)_5
+  - first:
+      213: -4374928354407181401
+    second: cardsLarge_tilemap2 (1)_6
+  - first:
+      213: 4144339829483968778
+    second: cardsLarge_tilemap2 (1)_7
+  - first:
+      213: -5780367542024727795
+    second: cardsLarge_tilemap2 (1)_8
+  - first:
+      213: 2433002469873384557
+    second: cardsLarge_tilemap2 (1)_9
+  - first:
+      213: 9093694273942251573
+    second: cardsLarge_tilemap2 (1)_10
+  - first:
+      213: 2737238401413946221
+    second: cardsLarge_tilemap2 (1)_11
+  - first:
+      213: -2613084496305298367
+    second: cardsLarge_tilemap2 (1)_12
+  - first:
+      213: 5926933895677008027
+    second: cardsLarge_tilemap2 (1)_13
+  - first:
+      213: 583746416691532827
+    second: cardsLarge_tilemap2 (1)_14
+  - first:
+      213: -1879235126670097050
+    second: cardsLarge_tilemap2 (1)_15
+  - first:
+      213: -2525965579298776245
+    second: cardsLarge_tilemap2 (1)_16
+  - first:
+      213: 8897749817982519685
+    second: cardsLarge_tilemap2 (1)_17
+  - first:
+      213: 6700002298098794760
+    second: cardsLarge_tilemap2 (1)_18
+  - first:
+      213: 1473792810468814330
+    second: cardsLarge_tilemap2 (1)_19
+  - first:
+      213: 6891871294641511840
+    second: cardsLarge_tilemap2 (1)_20
+  - first:
+      213: -659598424454048368
+    second: cardsLarge_tilemap2 (1)_21
+  - first:
+      213: -2129180414078623815
+    second: cardsLarge_tilemap2 (1)_22
+  - first:
+      213: 8424392360802367200
+    second: cardsLarge_tilemap2 (1)_23
+  - first:
+      213: 5876508915172764302
+    second: cardsLarge_tilemap2 (1)_24
+  - first:
+      213: -7433034100492989471
+    second: cardsLarge_tilemap2 (1)_25
+  - first:
+      213: -5382293329116757498
+    second: cardsLarge_tilemap2 (1)_26
+  - first:
+      213: 1598453516245285615
+    second: cardsLarge_tilemap2 (1)_27
+  - first:
+      213: -5259587328377956295
+    second: cardsLarge_tilemap2 (1)_28
+  - first:
+      213: 8021066176972622395
+    second: cardsLarge_tilemap2 (1)_29
+  - first:
+      213: -2902525543050642094
+    second: cardsLarge_tilemap2 (1)_30
+  - first:
+      213: 905767416318628910
+    second: cardsLarge_tilemap2 (1)_31
+  - first:
+      213: -408266550131290094
+    second: cardsLarge_tilemap2 (1)_32
+  - first:
+      213: 377274211392762433
+    second: cardsLarge_tilemap2 (1)_33
+  - first:
+      213: 2058132643892274866
+    second: cardsLarge_tilemap2 (1)_34
+  - first:
+      213: 8788241101282793190
+    second: cardsLarge_tilemap2 (1)_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: red ace kick
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec97ac268744c6d90800000000000000
+      internalID: -7103227228425913906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red 7 feint
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b44ea3a0408f1df0800000000000000
+      internalID: -207306042723384144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red 8
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 921b15fc808ee1f90800000000000000
+      internalID: -6980887247842070231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red 9
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b33cb9af2f0866cc0800000000000000
+      internalID: -3718142661272812741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red 10
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a28b682b194307370800000000000000
+      internalID: 8318206312123381802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red under
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a396cd47d12943c0800000000000000
+      internalID: -4374928354407181401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red upper dodge
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0915e40e17a38930800000000000000
+      internalID: 4144339829483968778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red king
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 196
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d031b62a85208cfa0800000000000000
+      internalID: -5780367542024727795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green ace kick
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 538e45ef2ca433e70800000000000000
+      internalID: 9093694273942251573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green 7 feint
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b16d5d2df9cf520800000000000000
+      internalID: 2737238401413946221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green 8
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14464adce757cbbd0800000000000000
+      internalID: -2613084496305298367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green 9
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b98dc03d9f2b04250800000000000000
+      internalID: 5926933895677008027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green 10
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b145ecde542e91800800000000000000
+      internalID: 583746416691532827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green under
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6658461eb9d9be5e0800000000000000
+      internalID: -1879235126670097050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green upper dodge
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b580350b7f1fcd0800000000000000
+      internalID: -2525965579298776245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green king
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589052131582b7b70800000000000000
+      internalID: 8897749817982519685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backside
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 131
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 801ca7c87903bfc50800000000000000
+      internalID: 6700002298098794760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue ace kick
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afda48ca0c6f37410800000000000000
+      internalID: 1473792810468814330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue 7 feint
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ad91d28d68d4af50800000000000000
+      internalID: 6891871294641511840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue 8
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09552084ab2a8d6f0800000000000000
+      internalID: -659598424454048368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue 9
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bfdf1cb1b1a372e0800000000000000
+      internalID: -2129180414078623815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue 10
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e6b322c73479e470800000000000000
+      internalID: 8424392360802367200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue under
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8ae94829bd8d8150800000000000000
+      internalID: 5876508915172764302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue upper dodge
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eb00c41ede88d890800000000000000
+      internalID: -7433034100492989471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue king
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6028a09dbb04e45b0800000000000000
+      internalID: -5382293329116757498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange ace kick
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 938d2eaf0313207b0800000000000000
+      internalID: -5259587328377956295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange 7 feint
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3a8a56c03d805f60800000000000000
+      internalID: 8021066176972622395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange 8
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25df7f6956828b7d0800000000000000
+      internalID: -2902525543050642094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange 9
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e249bca8aaee19c00800000000000000
+      internalID: 905767416318628910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange 10
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21010c95cbb855af0800000000000000
+      internalID: -408266550131290094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange under
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1423bf875e85c3500800000000000000
+      internalID: 377274211392762433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange upper dodge
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6a5d33cb4ff8c10800000000000000
+      internalID: 2058132643892274866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange king
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e6d27238ba16f970800000000000000
+      internalID: 8788241101282793190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all colors upper dodge
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 66
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f60d5e0d16c19e94292212702cea0f16
+      internalID: -2045008662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9182a5979e443f54c933fc7a2eaaeb11
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      all colors upper dodge: -2045008662
+      backside: 6700002298098794760
+      blue 10: 8424392360802367200
+      blue 7 feint: 6891871294641511840
+      blue 8: -659598424454048368
+      blue 9: -2129180414078623815
+      blue ace kick: 1473792810468814330
+      blue king: -5382293329116757498
+      blue under: 5876508915172764302
+      blue upper dodge: -7433034100492989471
+      cardsLarge_tilemap2 (1)_1: -7722600162642680531
+      cardsLarge_tilemap2 (1)_27: 1598453516245285615
+      cardsLarge_tilemap2 (1)_9: 2433002469873384557
+      d: -7433034100492989471
+      green 10: 583746416691532827
+      green 7 feint: 2737238401413946221
+      green 8: -2613084496305298367
+      green 9: 5926933895677008027
+      green ace kick: 9093694273942251573
+      green king: 8897749817982519685
+      green under: -1879235126670097050
+      green upper dodge: -2525965579298776245
+      orange 10: -408266550131290094
+      orange 7 feint: 8021066176972622395
+      orange 8: -2902525543050642094
+      orange 9: 905767416318628910
+      orange ace kick: -5259587328377956295
+      orange king: 8788241101282793190
+      orange under: 377274211392762433
+      orange upper dodge: 2058132643892274866
+      red 10: 8318206312123381802
+      red 7 feint: -207306042723384144
+      red 8: -6980887247842070231
+      red 9: -3718142661272812741
+      red ace kick: -7103227228425913906
+      red king: -5780367542024727795
+      red under: -4374928354407181401
+      red upper dodge: 4144339829483968778
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

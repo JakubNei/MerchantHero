@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c1be6d544f6b540b8795fbaca034b7, type: 3}
+  m_Name: CardSpritesConfig
+  m_EditorClassIdentifier: 
+  cards:
+  - color: 0
+    type: 1
+    sprite: {fileID: -7103227228425913906, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 4
+    sprite: {fileID: -207306042723384144, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 5
+    sprite: {fileID: -6980887247842070231, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 6
+    sprite: {fileID: -3718142661272812741, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 7
+    sprite: {fileID: 8318206312123381802, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 2
+    sprite: {fileID: -4374928354407181401, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 0
+    sprite: {fileID: 4144339829483968778, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 0
+    type: 3
+    sprite: {fileID: -5780367542024727795, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 1
+    sprite: {fileID: 9093694273942251573, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 4
+    sprite: {fileID: 2737238401413946221, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 5
+    sprite: {fileID: -2613084496305298367, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 6
+    sprite: {fileID: 5926933895677008027, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 7
+    sprite: {fileID: 583746416691532827, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 2
+    sprite: {fileID: -1879235126670097050, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 0
+    sprite: {fileID: -2525965579298776245, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 1
+    type: 3
+    sprite: {fileID: 8897749817982519685, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 1
+    sprite: {fileID: 1473792810468814330, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 4
+    sprite: {fileID: 6891871294641511840, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 5
+    sprite: {fileID: -659598424454048368, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 6
+    sprite: {fileID: -2129180414078623815, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 7
+    sprite: {fileID: 8424392360802367200, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 2
+    sprite: {fileID: 5876508915172764302, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 0
+    sprite: {fileID: -7433034100492989471, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 2
+    type: 3
+    sprite: {fileID: -5382293329116757498, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 1
+    sprite: {fileID: -5259587328377956295, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 4
+    sprite: {fileID: 8021066176972622395, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 5
+    sprite: {fileID: -2902525543050642094, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 6
+    sprite: {fileID: 905767416318628910, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 7
+    sprite: {fileID: -408266550131290094, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 2
+    sprite: {fileID: 377274211392762433, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 0
+    sprite: {fileID: 2058132643892274866, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  - color: 3
+    type: 3
+    sprite: {fileID: 8788241101282793190, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  backSide: {fileID: 6700002298098794760, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
+  allColorsUpper: {fileID: -2045008662, guid: 829e506f141c79948b4431f4d3fd4aa3, type: 3}
