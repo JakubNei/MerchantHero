@@ -15,8 +15,6 @@ public class HighlightSprite : MonoBehaviour
     Dictionary<SpriteRenderer, RevertData> revertData = new();
 
     Material extraRendererMaterial;
-    Material replacementMaterial;
-
 
     static HighlightSprite instance;
     static HighlightSprite Instance
@@ -35,17 +33,25 @@ public class HighlightSprite : MonoBehaviour
 
     public static void Highlight(GameObject gameObject)
     {
+        Highlight(gameObject, Color.black);
+    }
+    public static void Highlight(GameObject gameObject, Color outlineColor)
+    {
         foreach (var spriteRenderer in gameObject.GetComponentsInChildren<SpriteRenderer>())
         {
-            Instance.HighlightInternal(spriteRenderer);
+            Instance.HighlightInternal(spriteRenderer, outlineColor);
         }
     }
     public static void Highlight(SpriteRenderer spriteRenderer)
     {
-        Instance.HighlightInternal(spriteRenderer);
+        Highlight(spriteRenderer, Color.black);
+    }
+    public static void Highlight(SpriteRenderer spriteRenderer, Color outlineColor)
+    {
+        Instance.HighlightInternal(spriteRenderer, outlineColor);
     }
 
-    void HighlightInternal(SpriteRenderer spriteRenderer)
+    void HighlightInternal(SpriteRenderer spriteRenderer, Color outlineColor)
     {
         if (spriteRenderer.sortingLayerName == "UI")
             return;
@@ -66,26 +72,26 @@ public class HighlightSprite : MonoBehaviour
             revertData.Add(spriteRenderer, toRevert);
         }
 
+        toRevert.outlineSpriteRenderer.material.SetColor("_OutlineColor", outlineColor);
         toRevert.timeWhenToRevent = Time.realtimeSinceStartupAsDouble + 0.1;
-        spriteRenderer.material = replacementMaterial;
         CopyProperties(toRevert.outlineSpriteRenderer, spriteRenderer);
     }
 
-    static void CopyProperties(SpriteRenderer target, SpriteRenderer source)
+    static void CopyProperties(SpriteRenderer to, SpriteRenderer from)
     {
-        target.sprite = source.sprite;
-        target.drawMode = source.drawMode;
-        target.size = source.size;
-        target.adaptiveModeThreshold = source.adaptiveModeThreshold;
-        target.tileMode = source.tileMode;
-        target.color = source.color;
-        target.maskInteraction = source.maskInteraction;
-        target.flipX = source.flipX;
-        target.flipY = source.flipY;
-        target.spriteSortPoint = source.spriteSortPoint;
-        target.sortingLayerName = source.sortingLayerName;
-        target.sortingLayerID = source.sortingLayerID;
-        target.sortingOrder = source.sortingOrder;
+        to.sprite = from.sprite;
+        to.drawMode = from.drawMode;
+        to.size = from.size;
+        to.adaptiveModeThreshold = from.adaptiveModeThreshold;
+        to.tileMode = from.tileMode;
+        to.color = from.color;
+        to.maskInteraction = from.maskInteraction;
+        to.flipX = from.flipX;
+        to.flipY = from.flipY;
+        to.spriteSortPoint = from.spriteSortPoint;
+        to.sortingLayerName = from.sortingLayerName;
+        to.sortingLayerID = from.sortingLayerID;
+        to.sortingOrder = from.sortingOrder;
     }
 
     void Awake()
@@ -97,9 +103,7 @@ public class HighlightSprite : MonoBehaviour
     {
         if (!extraRendererMaterial)
             extraRendererMaterial = Resources.Load<Material>("HighlightSprite_ExtraRenderer");
-        if (!replacementMaterial)
-            replacementMaterial = Resources.Load<Material>("HighlightSprite_Replacement");
-    }
+}
     List<SpriteRenderer> toRevertNow = new();
     void Update()
     {

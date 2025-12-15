@@ -1,4 +1,5 @@
-Shader "Sprites/HighlightSprite_Replacement"
+ // replaces original SriteRenderer material and adds outline
+Shader "Sprites/HighlightSprite/Replacement"
 {
     Properties
     {

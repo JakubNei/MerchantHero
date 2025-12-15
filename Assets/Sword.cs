@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
@@ -8,8 +9,28 @@ public class Sword : MonoBehaviour
 
     public bool slashedNow;
 
-    public void Slash(bool slash)
+    List<Killable> inRange = new();
+    public void Tick(bool slash)
     {
+        float attackRadius = Mathf.Abs(attackCircle.transform.localScale.x * 0.5f);
+        if (Input.GetKey(KeyCode.G))
+            attackRadius *= 20f;
+        foreach (var c in Physics2D.OverlapCircleAll(attackCircle.transform.position, attackRadius))
+        {
+            Transform p = c.transform;
+            var k = p.GetComponent<Killable>();
+            while (!k && p.parent)
+            {
+                p = p.parent;
+                k = p.GetComponent<Killable>();
+            }
+            if (k)
+            {
+                HighlightSprite.Highlight(k.gameObject, Color.red * 0.6f    );
+                inRange.Add(k);
+            }
+        }
+
         if (slash)
         {
             if (slashedNow)
@@ -19,21 +40,9 @@ public class Sword : MonoBehaviour
             attack.SetActive(slashedNow);
 
             Sounds.PlayAudioAtLocation(transform, Sounds.ID.SwooshThrowingObject, 0.2f);
-
-            float attackRadius = Mathf.Abs(attackCircle.transform.localScale.x * 0.5f);
-            if (Input.GetKey(KeyCode.G))
-                attackRadius *= 20f;
-            foreach (var c in Physics2D.OverlapCircleAll(attackCircle.transform.position, attackRadius))
+            foreach (var k in inRange)
             {
-                Transform p = c.transform;
-                var k = p.GetComponent<Killable>();
-                while (!k && p.parent)
-                {
-                    p = p.parent;
-                    k = p.GetComponent<Killable>();
-                }
-                if (k)
-                    k.OnHitFrom(transform.position);
+                k.OnHitFrom(transform.position);
             }
         }
         else
