@@ -39,6 +39,7 @@ public class AutoPickup : MonoBehaviour
     {
         yield return MoveToPosition(transform.position + Vector3.up * 0.5f, moveSpeed);
         yield return MoveToPosition(() => { return target.position + Vector3.up * 0.5f; }, moveSpeed);
+        Sounds.PlayAudio(transform.position, Sounds.ID.CollectCoin, 0.3f);
         GameObject.Destroy(gameObject);
     }
 

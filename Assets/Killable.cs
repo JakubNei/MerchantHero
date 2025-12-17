@@ -62,7 +62,7 @@ public class Killable : MonoBehaviour
 
     public void OnHitFrom(Vector3 fromPosition)
     {
-        Sounds.PlayAudioAtLocation(transform, Sounds.ID.HitFlesh, 0.05f);
+        Sounds.PlayAudio(transform, Sounds.ID.HitFlesh, 0.05f);
 
         timesHitBySomething++;
 

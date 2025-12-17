@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Sprites/PapyrusBackground/UVOffsetByObjectPosition"
+Shader "Sprites/PapyrusBackground/NoUVOFfset"
 {
     Properties
     {
@@ -136,8 +136,7 @@ Shader "Sprites/PapyrusBackground/UVOffsetByObjectPosition"
             {
                 UNITY_SETUP_INSTANCE_ID (IN);
                 fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
-                float3 objectWorldPos = unity_ObjectToWorld._m03_m13_m23;
-                float2 o = float2(-objectWorldPos.y * 3.56, objectWorldPos.x * 9.75);
+                float2 o = 0;
                 fixed4 papyrus = tex2D(_PapyrusTex, IN.texcoord + o) * IN.color;
                 c.rgb = c.rgb * papyrus.rgb; // white is more papyrus
                 c.rgb *= c.a;                

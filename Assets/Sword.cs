@@ -15,6 +15,8 @@ public class Sword : MonoBehaviour
         float attackRadius = Mathf.Abs(attackCircle.transform.localScale.x * 0.5f);
         if (Input.GetKey(KeyCode.G))
             attackRadius *= 20f;
+
+        inRange.Clear();
         foreach (var c in Physics2D.OverlapCircleAll(attackCircle.transform.position, attackRadius))
         {
             Transform p = c.transform;
@@ -39,7 +41,7 @@ public class Sword : MonoBehaviour
             rest.SetActive(!slashedNow);
             attack.SetActive(slashedNow);
 
-            Sounds.PlayAudioAtLocation(transform, Sounds.ID.SwooshThrowingObject, 0.2f);
+            Sounds.PlayAudio(transform, Sounds.ID.SwooshThrowingObject, 0.2f);
             foreach (var k in inRange)
             {
                 k.OnHitFrom(transform.position);

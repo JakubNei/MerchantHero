@@ -149,7 +149,7 @@ Shader "Sprites/HighlightSprite/ExtraRenderer"
 				fixed bottomPixel2 = SampleSpriteTexture(IN.texcoord + float2(0, 2* -_MainTex_TexelSize.y)).a; 
                 m = max(m, max(max(leftPixel2, upPixel2), max(rightPixel2, bottomPixel2)));
 
-				fixed outline = sprite.a < 0.7 && m > 0.1 ? m : 0; 
+				fixed outline = sprite.a < 0.3 && m > 0.3 ? m : 0; 
                 
                 float4 outlineColor = _OutlineColor;
                 outlineColor.rgb *= outlineColor.a;
