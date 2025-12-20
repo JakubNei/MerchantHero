@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5712267957431832926}
   - component: {fileID: 641544868548097800}
   - component: {fileID: 618942473801371119}
+  - component: {fileID: -8784506235656957616}
   m_Layer: 0
   m_Name: Devil
   m_TagString: Untagged
@@ -119,8 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseDefailt: {fileID: 9180697370322599888}
   poseDead: {fileID: 1551490405708111252}
-  spawnOnBloodSpill: {fileID: 4391201495922153864, guid: c70967cc3e759a046a84935a47504c2d, type: 3}
   autoDieOnSpawn: 0
+  bloodSpawnsPickup: 1
   timesHitBySomething: 0
   isDead: 0
   lastPositonWhenDead: {x: 0, y: 0, z: 0}
@@ -160,6 +161,18 @@ MonoBehaviour:
   positionCarryObject: {fileID: 7818105329385711386}
   parentToThisOnCarryStart: 0
   carrying: []
+--- !u!114 &-8784506235656957616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101913206660579810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659ce063767426b448ca8ff8ba0c6f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
 --- !u!1 &1551490405708111252
 GameObject:
   m_ObjectHideFlags: 0

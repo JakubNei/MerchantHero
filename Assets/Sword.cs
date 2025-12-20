@@ -28,7 +28,7 @@ public class Sword : MonoBehaviour
             }
             if (k)
             {
-                HighlightSprite.Highlight(k.gameObject, Color.red * 0.6f    );
+                HighlightSprite.Highlight(k.gameObject, Color.red * (k.isDead ? 0.2f : 0.6f));
                 inRange.Add(k);
             }
         }

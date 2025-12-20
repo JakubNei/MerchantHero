@@ -6,9 +6,9 @@ public class Killable : MonoBehaviour
 {
     public GameObject poseDefailt;
     public GameObject poseDead;
-    public GameObject spawnOnBloodSpill;
 
     public bool autoDieOnSpawn = false;
+    public bool bloodSpawnsPickup = false;
 
     public int timesHitBySomething;
 
@@ -45,7 +45,7 @@ public class Killable : MonoBehaviour
                     var v = p - lastPositonWhenDead;
                     v.z = 0;
                     var a = Vector2.SignedAngle(Vector2.up, v);
-                    var b = SpawnBlood();
+                    var b = SpawnBlood(BloodSource.Drag);
                     b.transform.position = (p + lastPositonWhenDead) / 2;
                     b.transform.eulerAngles = new Vector3(0, 0, a);
                     var s = b.transform.localScale;
@@ -77,22 +77,29 @@ public class Killable : MonoBehaviour
             }
 
             if (Random.Range(0, 100) > 50)
-                {
-                    // physical push ?
-                    //this.transform.position += (this.transform.position - fromPosition).normalized * Random.Range(0.1f, 10f);
-                }
+            {
+                // physical push ?
+                //this.transform.position += (this.transform.position - fromPosition).normalized * Random.Range(0.1f, 10f);
+            }
 
             Die();
         }
         else if (bloodLeft > 0)
         {
-            SpawnBloodScaledByHitCount();
+            SpawnBloodScaledByHitCount(BloodSource.Hit);
         }
-         if (onGotHit != null)
+        if (onGotHit != null)
             onGotHit();
     }
 
-    GameObject SpawnBlood()
+    enum BloodSource
+    {
+        Drag,
+        Hit,
+        Death,
+    }
+
+    GameObject SpawnBlood(BloodSource source)
     {
         GameObject prefabBlood = Resources.Load<GameObject>("Blood");
         var bounds = GetBounds();
@@ -100,11 +107,11 @@ public class Killable : MonoBehaviour
         var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, 1 * m * 0.05f);
-        if (spawnOnBloodSpill)
-            GameObject.Instantiate(spawnOnBloodSpill, bounds.center, Quaternion.identity);
+        if (bloodSpawnsPickup && source != BloodSource.Drag)
+            SpawnBloodPickup();
         return b;
     }
-    GameObject SpawnBloodScaledByHitCount()
+    GameObject SpawnBloodScaledByHitCount(BloodSource source)
     {
         GameObject prefabBlood = Resources.Load<GameObject>("Blood");
         var bounds = GetBounds();
@@ -112,11 +119,18 @@ public class Killable : MonoBehaviour
         var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, (1 + Mathf.Min(10, timesHitBySomething)) * m * 0.05f);
-        if (spawnOnBloodSpill)
-            GameObject.Instantiate(spawnOnBloodSpill, bounds.center, Quaternion.identity);
+        if (bloodSpawnsPickup && source != BloodSource.Drag)
+            SpawnBloodPickup();
         return b;
     }
 
+    void SpawnBloodPickup()
+    {
+        GameObject prefabBloodPickup = Resources.Load<GameObject>("BloodPickup");
+        var bounds = GetBounds();
+        GameObject.Instantiate(prefabBloodPickup, bounds.center, Quaternion.identity);
+    }
+    
     Bounds GetBounds()
     {
         bool f = true;
@@ -154,7 +168,7 @@ public class Killable : MonoBehaviour
 
         isDead = true;
 
-        SpawnBlood();
+        SpawnBlood(BloodSource.Death);
 
         lastPositonWhenDead = GetBounds().center;
 

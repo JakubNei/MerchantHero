@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 459290393613736428}
   - component: {fileID: 2465688818195369058}
   - component: {fileID: 7837743826049331702}
+  - component: {fileID: 7010898410856723274}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Untagged
@@ -117,6 +118,18 @@ MonoBehaviour:
   positionCarryObject: {fileID: 3559093833758595692}
   parentToThisOnCarryStart: 0
   carrying: []
+--- !u!114 &7010898410856723274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68837855537465856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659ce063767426b448ca8ff8ba0c6f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
 --- !u!1 &2963471686540547336
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +245,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -253,6 +268,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

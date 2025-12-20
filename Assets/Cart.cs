@@ -53,12 +53,5 @@ public class Cart : MonoBehaviour
             }
         }
 
-        {
-            var p = Camera.main.transform.position;
-            p.x = this.transform.position.x;
-            p.y = this.transform.position.y;
-            Camera.main.transform.position = p;
-        }
-
     }
 }

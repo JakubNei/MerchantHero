@@ -14,6 +14,8 @@ public class CharacterMovement : MonoBehaviour
 
     public bool flippedHorizontally = false;
 
+    public Vector3 PositionWithouOffset => new Vector3(transform.position.x, transform.position.y - targetUpDownOffset, transform.position.z);
+
 
     void Update()
     {

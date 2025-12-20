@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8445354249372905491}
   - component: {fileID: 6910534566532950053}
   m_Layer: 0
-  m_Name: AutoPickup
+  m_Name: BloodPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

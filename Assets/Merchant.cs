@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.WebSockets;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterMovement), typeof(CanCarry))]
 public class Merchant : MonoBehaviour
@@ -63,7 +65,12 @@ public class Merchant : MonoBehaviour
         var canCarry = GetComponent<CanCarry>();
 
         var bounds = GetBounds();
-        var overlaps = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0);
+        var mousePosition = Input.mousePosition;
+        var carryPoint = bounds.center;
+        var offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane), Camera.MonoOrStereoscopicEye.Mono) - carryPoint;
+        offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
+        carryPoint += offset;
+        var overlaps = Physics2D.OverlapBoxAll(carryPoint, bounds.size, 0);
 
         Cart couldMoveCart = null;
         if (!movingCart && !canCarry.IsCarryingAnything)
@@ -83,19 +90,26 @@ public class Merchant : MonoBehaviour
         }
 
         Carryable couldCarry = null;
+        float closestCarryableDistance = float.MaxValue;
         if (!movingCart && !canCarry.IsCarryingAnything)
         {
             foreach (var c in overlaps)
             {
                 Transform p = c.transform;
-                while (p.parent)
-                    p = p.parent;
+                
                 var carryable = p.GetComponent<Carryable>();
-                if (carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
+                while (!carryable && p.parent)
                 {
+                    p = p.parent;
+                    p.GetComponent<Carryable>();
+                }
+                if (!carryable)
+                    continue;
+                var d = Vector3.Distance(carryable.transform.position, carryPoint);
+                if (d < closestCarryableDistance && carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
+                {
+                    closestCarryableDistance = d;
                     couldCarry = carryable;
-
-                    break;
                 }
             }
         }
@@ -106,50 +120,50 @@ public class Merchant : MonoBehaviour
         }
         else if (couldCarry)
         {
-            HighlightSprite.Highlight(couldCarry.gameObject);            
+            HighlightSprite.Highlight(couldCarry.gameObject);
         }
 
         if (wantsToMoveCartOrCarry)
+        {
+            if (couldMoveCart)
             {
-                if (couldMoveCart)
-                {
-                    couldMoveCart.wantsToMoveForward = true;
-                    movingCart = couldMoveCart;
-                }
-                else if (couldCarry)
-                {
-                    couldCarry.price += 1; // increase price so devils are more likely to steal it
-                    canCarry.ForceStartCarrying(couldCarry);
-                    couldCarry.wasEverPickedByPlayer = true;
-                }
+                couldMoveCart.wantsToMoveForward = true;
+                movingCart = couldMoveCart;
             }
-            else
+            else if (couldCarry)
             {
-                if (canCarry.IsCarryingAnything)
+                couldCarry.price += 1; // increase price so devils are more likely to steal it
+                canCarry.ForceStartCarrying(couldCarry);
+                couldCarry.wasEverPickedByPlayer = true;
+            }
+        }
+        else
+        {
+            if (canCarry.IsCarryingAnything)
+            {
+                var addToCart = new List<Carryable>();
+                foreach (var c in canCarry.carrying)
                 {
-                    var addToCart = new List<Carryable>();
-                    foreach (var c in canCarry.carrying)
+                    if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
                     {
-                        if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
-                        {
-                            addToCart.Add(c);
-                        }
+                        addToCart.Add(c);
                     }
-                    foreach (var c in addToCart)
-                    {
-                        c.price += 1; // increase price so devils are more likely to steal it
-                        Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
-                        c.wasEverInCart = true;
-                    }
-                    canCarry.StopCarrying();
                 }
+                foreach (var c in addToCart)
+                {
+                    c.price += 1; // increase price so devils are more likely to steal it
+                    Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
+                    c.wasEverInCart = true;
+                }
+                canCarry.StopCarrying();
+            }
 
-                if (movingCart)
-                {
-                    movingCart.wantsToMoveForward = false;
-                    movingCart = null;
-                }
+            if (movingCart)
+            {
+                movingCart.wantsToMoveForward = false;
+                movingCart = null;
             }
+        }
 
 
         if (sword)
@@ -158,19 +172,35 @@ public class Merchant : MonoBehaviour
         }
 
         if (movingCart)
-            this.transform.position = movingCart.forceDrageerPosition.position;
-
-        if (movingCart && !movingCart.canBeMoved)
         {
-            movingCart.wantsToMoveForward = false;
-            movingCart = null;
+            transform.position = movingCart.forceDrageerPosition.position;
+            if (!movingCart.canBeMoved)
+            {
+                movingCart.wantsToMoveForward = false;
+                movingCart = null;
+            }
         }
 
         Vector3 movementVector = Vector3.zero;
         movementVector.x += Input.GetAxis("Horizontal");
         movementVector.y += Input.GetAxis("Vertical");
 
-        GetComponent<CharacterMovement>().movementVector = movementVector;
+        Vector3 position = transform.position;
+        var CharacterMovement = GetComponent<CharacterMovement>();
+        CharacterMovement.movementVector = movementVector;
+        position = CharacterMovement.PositionWithouOffset;
+
+        if (Cart.I && Cart.I.enabled)
+        {
+            position = Vector3.Lerp(position, Cart.I.transform.position, 0.5f);
+        }
+
+        {
+            var p = Camera.main.transform.position;
+            p.x = position.x;
+            p.y = position.y;
+            Camera.main.transform.position = p;
+        }
     }
 
 }

@@ -1,9 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PolygonCollider2D))]
 public class Carryable : MonoBehaviour
 {
     public float price = 0;
-    public bool wasEverPickedByPlayer = false;	
+    public bool wasEverPickedByPlayer = false;
     public bool wasEverInCart = false;
     public bool canBeCarried = true;
     public bool onlyAllowCarryingWhenDead = false;

@@ -53,6 +53,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,6 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -216,6 +219,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -237,6 +242,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -337,6 +343,7 @@ GameObject:
   - component: {fileID: 1623927819800068431}
   - component: {fileID: -1193010539542937891}
   - component: {fileID: 4489589404985231610}
+  - component: {fileID: 3426446985675789684}
   m_Layer: 0
   m_Name: Kouzelnik
   m_TagString: Untagged
@@ -375,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseDefailt: {fileID: 3100742446146536958}
   poseDead: {fileID: 2051136605161536558}
+  spawnOnBloodSpill: {fileID: 0}
   autoDieOnSpawn: 0
   timesHitBySomething: 0
   isDead: 0
@@ -451,3 +459,15 @@ MonoBehaviour:
   movingForSeconds: 0
   targetUpDownOffset: 0
   flippedHorizontally: 0
+--- !u!114 &3426446985675789684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561986290608280482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659ce063767426b448ca8ff8ba0c6f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
