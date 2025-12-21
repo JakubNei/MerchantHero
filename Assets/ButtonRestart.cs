@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+[RequireComponent(typeof(Killable))]
 public class ButtonRestart : MonoBehaviour
 {
     public bool restartPending;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         var k = GetComponent<Killable>();
@@ -21,15 +21,5 @@ public class ButtonRestart : MonoBehaviour
             }
         };
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void Reset()
-    {
-        
-    }
 }
+

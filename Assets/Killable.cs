@@ -21,6 +21,7 @@ public class Killable : MonoBehaviour
     public int bloodMax = 50;
     public int bloodLeft;
     public bool configRotateAwayFromHitWhenKilled = true;
+    public float hatedByLeft = 0;
     void Start()
     {
         bloodLeft = bloodMax;
@@ -108,7 +109,7 @@ public class Killable : MonoBehaviour
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, 1 * m * 0.05f);
         if (bloodSpawnsPickup && source != BloodSource.Drag)
-            SpawnBloodPickup();
+            TrySpawnHatePickup();
         return b;
     }
     GameObject SpawnBloodScaledByHitCount(BloodSource source)
@@ -120,12 +121,15 @@ public class Killable : MonoBehaviour
         --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, (1 + Mathf.Min(10, timesHitBySomething)) * m * 0.05f);
         if (bloodSpawnsPickup && source != BloodSource.Drag)
-            SpawnBloodPickup();
+            TrySpawnHatePickup();
         return b;
     }
 
-    void SpawnBloodPickup()
+    void TrySpawnHatePickup()
     {
+        if (hatedByLeft <= 0)
+            return;
+        hatedByLeft -= 1;
         GameObject prefabBloodPickup = Resources.Load<GameObject>("BloodPickup");
         var bounds = GetBounds();
         GameObject.Instantiate(prefabBloodPickup, bounds.center, Quaternion.identity);
@@ -167,6 +171,7 @@ public class Killable : MonoBehaviour
             canCarry.enabled = false;
 
         isDead = true;
+        hatedByLeft = GetComponent<Relationship>().TotalHatedBy;
 
         SpawnBlood(BloodSource.Death);
 

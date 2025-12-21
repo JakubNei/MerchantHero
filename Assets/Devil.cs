@@ -42,12 +42,13 @@ public class Devil : MonoBehaviour
             Carryable closest = null;
             float closestWeight = float.MaxValue;
             float closestDist = float.MaxValue;
-            foreach (var item in DevilManager.I.itemsDevilsCanSteal)
+            foreach (var item in DevilManager.I.itemsDevilsWantToSteal)
             {
                 if (item.canBeCarried)
                 {
                     var d = Vector3.Distance(item.transform.position, this.transform.position);
-                    var w = d + item.price * 0.1f;
+                    var r = item.GetComponent<Relationship>();
+                    var w = d + (r ? r.TotalLovedBy * 0.1f : 0);
                     if (w < closestWeight)
                     {
                         closestWeight = w;
@@ -58,6 +59,7 @@ public class Devil : MonoBehaviour
             }
             if (closest)
             {
+                HatedByThoseWhoLove(closest.gameObject, 0.05f * Time.deltaTime);
                 if (closestDist < 7)
                 {
                     var v = closest.transform.position - this.transform.position;
@@ -68,7 +70,11 @@ public class Devil : MonoBehaviour
                 }
                 if (closestDist < 0.1f)
                 {
+                    // devil steals item, then the person who loved the item hates him
+                    HatedByThoseWhoLove(closest.gameObject, 1);
+
                     GetComponent<CanCarry>().ForceStartCarrying(closest);
+
                     aiBehaviour = AIBehaviour.RunsAwayFromCart;
                 }
             }
@@ -103,5 +109,17 @@ public class Devil : MonoBehaviour
         GetComponent<CharacterMovement>().movementVector = movementVector;
     }
 
+    void HatedByThoseWhoLove(GameObject go, float multiplier)
+    {
+            var r = GetComponent<Relationship>();
+            var cr = go.GetComponent<Relationship>();
+            if (r && cr)
+            {
+                foreach (var d in cr.relationships)
+                {
+                    r.AdjustHatedBy(d.Key, d.Value.lovedBy * multiplier);
+                }
+            }
+    }
 
 }

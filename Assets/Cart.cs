@@ -21,6 +21,7 @@ public class Cart : MonoBehaviour
         foreach (var item in GetComponentsInChildren<Carryable>())
         {
             canCarry.ForceStartCarrying(item);
+            Merchant.I.GetComponent<Relationship>().AdjustLoves(item.GetComponent<Relationship>(), 1);
             item.wasEverInCart = true;
         }
     }

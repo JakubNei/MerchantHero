@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterMovement), typeof(CanCarry))]
+[RequireComponent(typeof(CharacterMovement), typeof(CanCarry), typeof(Relationship))]
 public class Merchant : MonoBehaviour
 {
     public static Merchant I => FindAnyObjectByType<Merchant>();
@@ -132,7 +133,9 @@ public class Merchant : MonoBehaviour
             }
             else if (couldCarry)
             {
-                couldCarry.price += 1; // increase price so devils are more likely to steal it
+                var r = couldCarry.GetComponent<Relationship>();
+                if (r)
+                    GetComponent<Relationship>().AdjustLovedBy(r, 1);
                 canCarry.ForceStartCarrying(couldCarry);
                 couldCarry.wasEverPickedByPlayer = true;
             }
@@ -151,7 +154,9 @@ public class Merchant : MonoBehaviour
                 }
                 foreach (var c in addToCart)
                 {
-                    c.price += 1; // increase price so devils are more likely to steal it
+                    var r = c.GetComponent<Relationship>();
+                    if (r)
+                        GetComponent<Relationship>().AdjustLovedBy(r, 1); 
                     Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
                     c.wasEverInCart = true;
                 }
