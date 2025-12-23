@@ -15,6 +15,25 @@ public class Relationship : MonoBehaviour
     public float TotalHates { get; private set; }
     public float TotalLovedBy { get; private set; }
     public float TotalHatedBy { get; private set; }
+
+    public float LovedBy(GameObject go)
+    {
+        var r = go.GetComponent<Relationship>();
+        if (r && relationships.ContainsKey(r))
+        {
+            return relationships[r].lovedBy;
+        }
+        return 0;
+    }
+    public float HatedBy(GameObject go)
+    {
+        var r = go.GetComponent<Relationship>();
+        if (r && relationships.ContainsKey(r))
+        {
+            return relationships[r].hatedBy;
+        }
+        return 0;
+    }
     void GetRelationshipData(Relationship target, out RelationshipData data)
     {
         if (!relationships.ContainsKey(target))
@@ -76,6 +95,19 @@ public class Relationship : MonoBehaviour
         target.TotalHates += amount;
         targetData.hates += amount;
         target.relationships[this] = targetData;
+    }
+
+    public void HatedByThoseWhoLove(GameObject go, float multiplier)
+    {
+        var r = GetComponent<Relationship>();
+        var cr = go.GetComponent<Relationship>();
+        if (r && cr)
+        {
+            foreach (var d in cr.relationships)
+            {
+                r.AdjustHatedBy(d.Key, d.Value.lovedBy * multiplier);
+            }
+        }
     }
 
 }

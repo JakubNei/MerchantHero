@@ -8,11 +8,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterMovement), typeof(CanCarry), typeof(Relationship))]
+[RequireComponent(typeof(Container))]
 public class Merchant : MonoBehaviour
 {
     public static Merchant I => FindAnyObjectByType<Merchant>();
     public Cart movingCart;
     public Sword sword;
+    public float timeSinceLastMouseMove;
+    public Vector3 lastMousePosition;
 
     Vector3 offsetFromCart;
 
@@ -21,29 +24,9 @@ public class Merchant : MonoBehaviour
 
     }
 
-    Bounds GetBounds()
-    {
-        bool f = true;
-        Bounds b = new Bounds();
-        foreach (var s in GetComponentsInChildren<SpriteRenderer>())
-        {
-            if (f)
-            {
-                b = s.bounds;
-                f = false;
-            }
-            else
-            {
-                b.Encapsulate(s.bounds);
-            }
-        }
-
-        return b;
-    }
-
     void Update()
     {
-        bool wantsToMoveCartOrCarry =
+        bool wantsToMoveCartOrCarry_isDown =
             Input.GetKey(KeyCode.Q) ||
             Input.GetKey(KeyCode.G) ||
             Input.GetKey(KeyCode.H) ||
@@ -52,7 +35,16 @@ public class Merchant : MonoBehaviour
             Input.GetKey(KeyCode.LeftShift) ||
             Input.GetKey(KeyCode.LeftControl);
 
-        bool wanrsToSlash =
+        bool wantsToMoveCartOrCarry_wasJustPressed =
+            Input.GetKeyDown(KeyCode.Q) ||
+            Input.GetKeyDown(KeyCode.G) ||
+            Input.GetKeyDown(KeyCode.H) ||
+            Input.GetKeyDown(KeyCode.Tab) ||
+            Input.GetKeyDown(KeyCode.CapsLock) ||
+            Input.GetKeyDown(KeyCode.LeftShift) ||
+            Input.GetKeyDown(KeyCode.LeftControl);
+
+        bool wantsToSlash_isDown =
             Input.GetKey(KeyCode.E) ||
             Input.GetKey(KeyCode.F) ||
             Input.GetKey(KeyCode.R) ||
@@ -65,12 +57,19 @@ public class Merchant : MonoBehaviour
 
         var canCarry = GetComponent<CanCarry>();
 
-        var bounds = GetBounds();
+        var bounds = Utils.GetBounds(gameObject);
         var mousePosition = Input.mousePosition;
+        timeSinceLastMouseMove += Time.deltaTime;
+        if (mousePosition != lastMousePosition)
+            timeSinceLastMouseMove = 0;
+        lastMousePosition = mousePosition;
         var carryPoint = bounds.center;
-        var offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane), Camera.MonoOrStereoscopicEye.Mono) - carryPoint;
-        offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
-        carryPoint += offset;
+        if (timeSinceLastMouseMove < 2f)
+        {
+            var offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane), Camera.MonoOrStereoscopicEye.Mono) - carryPoint;
+            offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
+            carryPoint += offset;
+        }
         var overlaps = Physics2D.OverlapBoxAll(carryPoint, bounds.size, 0);
 
         Cart couldMoveCart = null;
@@ -97,7 +96,7 @@ public class Merchant : MonoBehaviour
             foreach (var c in overlaps)
             {
                 Transform p = c.transform;
-                
+
                 var carryable = p.GetComponent<Carryable>();
                 while (!carryable && p.parent)
                 {
@@ -124,7 +123,7 @@ public class Merchant : MonoBehaviour
             HighlightSprite.Highlight(couldCarry.gameObject);
         }
 
-        if (wantsToMoveCartOrCarry)
+        if (wantsToMoveCartOrCarry_isDown)
         {
             if (couldMoveCart)
             {
@@ -133,10 +132,21 @@ public class Merchant : MonoBehaviour
             }
             else if (couldCarry)
             {
-                var r = couldCarry.GetComponent<Relationship>();
-                if (r)
-                    GetComponent<Relationship>().AdjustLovedBy(r, 1);
-                canCarry.ForceStartCarrying(couldCarry);
+                GetComponent<Relationship>()?.AdjustLovedBy(couldCarry.GetComponent<Relationship>(), 1);
+                var c = GetComponent<Container>();
+                if (c.CanAdd(couldCarry) && couldCarry.volume < 0.05f)
+                {
+                    if (wantsToMoveCartOrCarry_wasJustPressed)
+                    {
+                        c.AddItem(couldCarry);
+                        var s = Sounds.PlayAudio(couldCarry.transform, Sounds.ID.CollectCoin);
+                        s.pitch = Mathf.Clamp(1 + Random.Range(-0.1f, 0.1f) - couldCarry.volume * 0.2f, 0.3f, 1.2f);
+                    }
+                }
+                else
+                {
+                    canCarry.ForceStartCarrying(couldCarry);
+                }
                 couldCarry.wasEverPickedByPlayer = true;
             }
         }
@@ -156,7 +166,7 @@ public class Merchant : MonoBehaviour
                 {
                     var r = c.GetComponent<Relationship>();
                     if (r)
-                        GetComponent<Relationship>().AdjustLovedBy(r, 1); 
+                        GetComponent<Relationship>().AdjustLovedBy(r, 1);
                     Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
                     c.wasEverInCart = true;
                 }
@@ -173,7 +183,7 @@ public class Merchant : MonoBehaviour
 
         if (sword)
         {
-            sword.Tick(wanrsToSlash);
+            sword.Tick(wantsToSlash_isDown);
         }
 
         if (movingCart)

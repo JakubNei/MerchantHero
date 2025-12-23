@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterMovement), typeof(Killable), typeof(CanCarry))]
+[RequireComponent(typeof(Relationship))]
+
 public class Devil : MonoBehaviour
 {
     public enum AIBehaviour
@@ -59,7 +61,7 @@ public class Devil : MonoBehaviour
             }
             if (closest)
             {
-                HatedByThoseWhoLove(closest.gameObject, 0.05f * Time.deltaTime);
+                GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 0.05f * Time.deltaTime);
                 if (closestDist < 7)
                 {
                     var v = closest.transform.position - this.transform.position;
@@ -71,7 +73,7 @@ public class Devil : MonoBehaviour
                 if (closestDist < 0.1f)
                 {
                     // devil steals item, then the person who loved the item hates him
-                    HatedByThoseWhoLove(closest.gameObject, 1);
+                    GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 1);
 
                     GetComponent<CanCarry>().ForceStartCarrying(closest);
 
@@ -107,19 +109,6 @@ public class Devil : MonoBehaviour
         }
 
         GetComponent<CharacterMovement>().movementVector = movementVector;
-    }
-
-    void HatedByThoseWhoLove(GameObject go, float multiplier)
-    {
-            var r = GetComponent<Relationship>();
-            var cr = go.GetComponent<Relationship>();
-            if (r && cr)
-            {
-                foreach (var d in cr.relationships)
-                {
-                    r.AdjustHatedBy(d.Key, d.Value.lovedBy * multiplier);
-                }
-            }
     }
 
 }

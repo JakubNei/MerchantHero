@@ -343,7 +343,8 @@ GameObject:
   - component: {fileID: 1623927819800068431}
   - component: {fileID: -1193010539542937891}
   - component: {fileID: 4489589404985231610}
-  - component: {fileID: 3426446985675789684}
+  - component: {fileID: 8119445669822481399}
+  - component: {fileID: 5815457999126298888}
   m_Layer: 0
   m_Name: Kouzelnik
   m_TagString: Untagged
@@ -382,14 +383,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseDefailt: {fileID: 3100742446146536958}
   poseDead: {fileID: 2051136605161536558}
-  spawnOnBloodSpill: {fileID: 0}
   autoDieOnSpawn: 0
+  bloodSpawnsPickup: 0
   timesHitBySomething: 0
   isDead: 0
   lastPositonWhenDead: {x: 0, y: 0, z: 0}
   bloodMax: 50
   bloodLeft: 0
   configRotateAwayFromHitWhenKilled: 1
+  hatedByLeft: 0
 --- !u!114 &-1193010539542937891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213b6f5bcae4ec143addf7a20937a51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
   wasEverPickedByPlayer: 0
   wasEverInCart: 0
   canBeCarried: 0
@@ -459,7 +460,59 @@ MonoBehaviour:
   movingForSeconds: 0
   targetUpDownOffset: 0
   flippedHorizontally: 0
---- !u!114 &3426446985675789684
+--- !u!60 &8119445669822481399
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561986290608280482}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
+  m_UseDelaunayMesh: 0
+--- !u!114 &5815457999126298888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,6 +521,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3561986290608280482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 659ce063767426b448ca8ff8ba0c6f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 961a90ba98f3cec4e8e5470f6edee3f5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  m_EditorClassIdentifier: Assembly-CSharp::Relationship

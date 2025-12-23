@@ -323,7 +323,8 @@ GameObject:
   - component: {fileID: 5358835288687496536}
   - component: {fileID: -6528306822402993139}
   - component: {fileID: 2562498682014429532}
-  - component: {fileID: 4349397308602676032}
+  - component: {fileID: 8413921357292663747}
+  - component: {fileID: 516398500555947186}
   m_Layer: 0
   m_Name: Bubna
   m_TagString: Untagged
@@ -362,14 +363,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseDefailt: {fileID: 5153752407120515716}
   poseDead: {fileID: 1856090661556701716}
-  spawnOnBloodSpill: {fileID: 0}
   autoDieOnSpawn: 0
+  bloodSpawnsPickup: 0
   timesHitBySomething: 0
   isDead: 0
   lastPositonWhenDead: {x: 0, y: 0, z: 0}
   bloodMax: 50
   bloodLeft: 0
   configRotateAwayFromHitWhenKilled: 1
+  hatedByLeft: 0
 --- !u!114 &-6528306822402993139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,7 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213b6f5bcae4ec143addf7a20937a51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
   wasEverPickedByPlayer: 0
   wasEverInCart: 0
   canBeCarried: 1
@@ -439,7 +440,59 @@ MonoBehaviour:
   movingForSeconds: 0
   targetUpDownOffset: 0
   flippedHorizontally: 0
---- !u!114 &4349397308602676032
+--- !u!60 &8413921357292663747
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557417975634742269}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
+  m_UseDelaunayMesh: 0
+--- !u!114 &516398500555947186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -448,6 +501,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8557417975634742269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 659ce063767426b448ca8ff8ba0c6f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 961a90ba98f3cec4e8e5470f6edee3f5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  m_EditorClassIdentifier: Assembly-CSharp::Relationship
