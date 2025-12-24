@@ -3853,6 +3853,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da9daec18f55f834db6075d75c0e68a7, type: 3}
+--- !u!1 &476992079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 68837855537465856, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
+  m_PrefabInstance: {fileID: 3464992635917632936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &478927525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1274278332557745394, guid: a180ac250ada9a34ab21768420131f6a, type: 3}
@@ -4804,6 +4809,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5353970090800703087, guid: 6b51b7e7f8fbbdf4992a62526c61a9af, type: 3}
   m_PrefabInstance: {fileID: 603315851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &608596365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 608596367}
+  - component: {fileID: 608596366}
+  m_Layer: 0
+  m_Name: PlayerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &608596366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608596365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd0a97a26327aa4e8f679c85e992d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  controlling: {fileID: 476992079}
+  movingCart: {fileID: 0}
+  sword: {fileID: 1146261677}
+  timeSinceLastMouseMove: 0
+  lastMousePosition: {x: 0, y: 0, z: 0}
+--- !u!4 &608596367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608596365}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.0705, y: 10.88933, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &611391725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6738788690241609850, guid: 0124e29eb7183094eb974b34008192fd, type: 3}
@@ -8856,6 +8910,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3793561762838622993, guid: 1253e8c06d6b95e4c8f1491847f73633, type: 3}
   m_PrefabInstance: {fileID: 1722290089}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1146261677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3805584940786218112, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
+  m_PrefabInstance: {fileID: 3464992635917632936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ad9032fa7d5aa4d9469b263c476541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1151818969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9509,7 +9574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fee57263b8d8c459da9a74be08e6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsDevilsCanSteal: []
+  itemsDevilsWantToSteal: []
   otherAliveDevils: []
 --- !u!4 &1215226507
 Transform:
@@ -16240,10 +16305,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7911121958153147736, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: feee72e9660236f459eafa67d87a7c82, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16703,6 +16764,7 @@ SceneRoots:
   - {fileID: 78830246}
   - {fileID: 1215226507}
   - {fileID: 3464992635917632936}
+  - {fileID: 608596367}
   - {fileID: 11594108}
   - {fileID: 2054967889}
   - {fileID: 2084913436}

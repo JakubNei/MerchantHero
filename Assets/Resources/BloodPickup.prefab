@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7027638829342307113}
   - component: {fileID: 8445354249372905491}
   - component: {fileID: 6910534566532950053}
+  - component: {fileID: -5764995921702896917}
   m_Layer: 0
   m_Name: BloodPickup
   m_TagString: Untagged
@@ -156,3 +157,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445193bf6be8e3a4aa36231149fbb048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoPickup
+--- !u!114 &-5764995921702896917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4391201495922153864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213b6f5bcae4ec143addf7a20937a51d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Carryable
+  wasEverPickedByPlayer: 0
+  wasEverInCart: 0
+  canBeCarried: 1
+  onlyAllowCarryingWhenDead: 0
+  isBeingCarriedBy: {fileID: 0}
+  volume: 0
+  semanticMaterial: 0

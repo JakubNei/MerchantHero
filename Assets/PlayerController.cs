@@ -7,18 +7,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterMovement), typeof(CanCarry), typeof(Relationship))]
-[RequireComponent(typeof(Container))]
-public class Merchant : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    public static Merchant I => FindAnyObjectByType<Merchant>();
+    public GameObject controlling;
+    public static PlayerController I => FindAnyObjectByType<PlayerController>();
     public Cart movingCart;
     public Sword sword;
     public float timeSinceLastMouseMove;
     public Vector3 lastMousePosition;
 
     Vector3 offsetFromCart;
-
+    void Awake()
+    {
+        if (!controlling)
+            controlling = gameObject;
+    }
     void Start()
     {
 
@@ -26,6 +29,11 @@ public class Merchant : MonoBehaviour
 
     void Update()
     {
+        if (!controlling)
+            return;
+        if (controlling.GetComponent<Killable>()?.isDead ?? false)
+            return;
+
         bool wantsToMoveCartOrCarry_isDown =
             Input.GetKey(KeyCode.Q) ||
             Input.GetKey(KeyCode.G) ||
@@ -58,8 +66,8 @@ public class Merchant : MonoBehaviour
         bool openInventory_wasJustPressed =
             Input.GetKeyDown(KeyCode.I);
 
-        var canCarry = GetComponent<CanCarry>();
-        var container = GetComponent<Container>();
+        var canCarry = controlling.GetComponent<CanCarry>();
+        var container = controlling.GetComponent<Container>();
 
         if (container && openInventory_wasJustPressed)
         {
@@ -147,8 +155,8 @@ public class Merchant : MonoBehaviour
                 }
                 else if (couldCarry)
                 {
-                    GetComponent<Relationship>()?.AdjustLovedBy(couldCarry.GetComponent<Relationship>(), 1);
-                    var c = GetComponent<Container>();
+                    controlling.GetComponent<Relationship>()?.AdjustLovedBy(couldCarry.GetComponent<Relationship>(), 1);
+                    var c = controlling.GetComponent<Container>();
                     if (c.CanAdd(couldCarry) && couldCarry.volume < 0.05f)
                     {
                         if (wantsToMoveCartOrCarry_wasJustPressed)
@@ -181,7 +189,7 @@ public class Merchant : MonoBehaviour
                     {
                         var r = c.GetComponent<Relationship>();
                         if (r)
-                            GetComponent<Relationship>().AdjustLovedBy(r, 1);
+                            controlling.GetComponent<Relationship>().AdjustLovedBy(r, 1);
                         Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
                         c.wasEverInCart = true;
                     }
@@ -195,7 +203,6 @@ public class Merchant : MonoBehaviour
                 }
             }
         }
-
 
         if (sword)
         {
@@ -217,14 +224,14 @@ public class Merchant : MonoBehaviour
         movementVector.y += Input.GetAxis("Vertical");
 
         Vector3 position = transform.position;
-        var CharacterMovement = GetComponent<CharacterMovement>();
-        CharacterMovement.movementVector = movementVector;
-        position = CharacterMovement.PositionWithouOffset;
+        var characterMovement = controlling.GetComponent<CharacterMovement>();
+        characterMovement.movementVector = movementVector;
+        position = characterMovement.PositionWithouOffset;
 
-        if (Cart.I && Cart.I.enabled)
-        {
-            position = Vector3.Lerp(position, Cart.I.transform.position, 0.5f);
-        }
+        // if (Cart.I && Cart.I.enabled)
+        // {
+        //     position = Vector3.Lerp(position, Cart.I.transform.position, 0.5f);
+        // }
 
         {
             var p = Camera.main.transform.position;

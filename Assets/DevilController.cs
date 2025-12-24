@@ -1,10 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterMovement), typeof(Killable), typeof(CanCarry))]
-[RequireComponent(typeof(Relationship))]
 
-public class Devil : MonoBehaviour
+public class DevilController : MonoBehaviour
 {
+    public GameObject controlling;
     public enum AIBehaviour
     {
         LookingForItemToSteal,
@@ -16,25 +15,32 @@ public class Devil : MonoBehaviour
 
     public Vector3 startWorldPos;
 
+    void Awake()
+    {
+        if (!controlling)
+            controlling = gameObject;
+    }
+
     void Start()
     {
         var s = Random.Range(0.80f, 1.2f);
         this.transform.localScale = new Vector3(s, s + Random.Range(-0.1f, +0.1f), 1);
-        GetComponent<CharacterMovement>().moveSpeed *= Random.Range(0.80f, 1.2f);
+        controlling.GetComponent<CharacterMovement>().moveSpeed *= Random.Range(0.80f, 1.2f);
         oneTimeRandomInsideUnitSphere = Random.insideUnitSphere;
         startWorldPos = this.transform.position;
         this.transform.position += new Vector3(Random.Range(-1f, +1f), Random.Range(-1f, +1f), 0);
 
-        GetComponent<Killable>().onDead += () =>
+        controlling.GetComponent<Killable>().onDead += () =>
         {
             this.enabled = false;
         };
-
     }
 
     void Update()
     {
-        if (GetComponent<Killable>().isDead)
+        if (!controlling)
+            return;
+        if (controlling.GetComponent<Killable>()?.isDead ?? false)
             return;
 
         Vector3 movementVector = Vector3.zero;
@@ -61,7 +67,7 @@ public class Devil : MonoBehaviour
             }
             if (closest)
             {
-                GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 0.05f * Time.deltaTime);
+                controlling.GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 0.05f * Time.deltaTime);
                 if (closestDist < 7)
                 {
                     var v = closest.transform.position - this.transform.position;
@@ -73,9 +79,9 @@ public class Devil : MonoBehaviour
                 if (closestDist < 0.1f)
                 {
                     // devil steals item, then the person who loved the item hates him
-                    GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 1);
+                    controlling.GetComponent<Relationship>().HatedByThoseWhoLove(closest.gameObject, 1);
 
-                    GetComponent<CanCarry>().ForceStartCarrying(closest);
+                    controlling.GetComponent<CanCarry>().ForceStartCarrying(closest);
 
                     aiBehaviour = AIBehaviour.RunsAwayFromCart;
                 }
@@ -93,7 +99,7 @@ public class Devil : MonoBehaviour
             if (oneTimeRandomInsideUnitSphere.y > 0.8f)
             {
                 // run from player
-                movementVector = this.transform.position - Merchant.I.transform.position;
+                movementVector = this.transform.position - PlayerController.I.transform.position;
             }
             else if (oneTimeRandomInsideUnitSphere.x > 0.7f)
             {
@@ -108,7 +114,7 @@ public class Devil : MonoBehaviour
             movementVector = movementVector.normalized;
         }
 
-        GetComponent<CharacterMovement>().movementVector = movementVector;
+        controlling.GetComponent<CharacterMovement>().movementVector = movementVector;
     }
 
 }

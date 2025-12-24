@@ -4,9 +4,9 @@ public class AutoPickup : MonoBehaviour
 {
     float pickupDistance = 2f;
     float moveSpeed = 5f;
-    private bool isPickingUp = false;
-    Transform target => Merchant.I.transform;
-    private Coroutine startBobCoroutine;
+    Transform target => PlayerController.I?.controlling?.transform;
+    Coroutine startBobCoroutine;
+    Coroutine pickupMoveCoroutine;
 
     void Start()
     {
@@ -15,15 +15,22 @@ public class AutoPickup : MonoBehaviour
 
     void Update()
     {
-        if (isPickingUp) return;
-
-        float distanceToMerchant = Vector3.Distance(transform.position, target.position);
-        if (distanceToMerchant < pickupDistance)
+        if (pickupMoveCoroutine != null)
         {
-            isPickingUp = true;
+            if (!transform)
+            {
+                StopCoroutine(pickupMoveCoroutine);
+                pickupMoveCoroutine = null;
+            }
+            return;
+        }
+
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        if (distanceToTarget < pickupDistance)
+        {
             if (startBobCoroutine != null)
                 StopCoroutine(startBobCoroutine);
-            StartCoroutine(PickupSequence());
+            pickupMoveCoroutine = StartCoroutine(PickupSequence());
         }
     }
 
@@ -40,7 +47,17 @@ public class AutoPickup : MonoBehaviour
         yield return MoveToPosition(transform.position + Vector3.up * 0.5f, moveSpeed);
         yield return MoveToPosition(() => { return target.position + Vector3.up * 0.5f; }, moveSpeed);
         Sounds.PlayAudio(transform.position, Sounds.ID.CollectCoin, 0.3f);
-        GameObject.Destroy(gameObject);
+        var targetContainer = target.GetComponent<Container>();
+        var c = GetComponent<Carryable>();
+        if (targetContainer)
+        {
+            if (targetContainer.CanAdd(c))
+                targetContainer.AddItem(c);
+        }
+        else
+        {
+            GameObject.Destroy(gameObject);
+        }
     }
 
     private System.Collections.IEnumerator MoveToPosition(Vector3 targetPos, float speed)

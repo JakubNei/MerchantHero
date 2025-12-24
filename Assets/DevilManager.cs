@@ -5,7 +5,7 @@ public class DevilManager : MonoBehaviour
 {
     public static DevilManager I => FindAnyObjectByType<DevilManager>();
     public List<Carryable> itemsDevilsWantToSteal = new();
-    public List<Devil> otherAliveDevils = new();
+    public List<DevilController> otherAliveDevils = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,7 +25,7 @@ public class DevilManager : MonoBehaviour
                 {
                     itemsDevilsWantToSteal.Add(item);
                 }
-                else if (item.isBeingCarriedBy.GetComponent<Devil>() == null)
+                else if (item.isBeingCarriedBy.GetComponent<DevilController>() == null)
                 {
                     // carried by player or cart
                     itemsDevilsWantToSteal.Add(item);
@@ -34,7 +34,7 @@ public class DevilManager : MonoBehaviour
         }
 
         otherAliveDevils.Clear();
-        foreach (var devil in FindObjectsByType<Devil>(FindObjectsSortMode.None))
+        foreach (var devil in FindObjectsByType<DevilController>(FindObjectsSortMode.None))
         {
             if (!devil.GetComponent<Killable>().isDead)
             {
