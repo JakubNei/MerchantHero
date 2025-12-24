@@ -39,7 +39,8 @@ public class Container : MonoBehaviour
         return currentItemsVolume + c.volume <= maxVolume;
     }
 
-    void Update()
+    public bool IsInventoryUIShown => showContentsCamera != null && showContentsCamera.gameObject.activeInHierarchy;
+    public void ShowInventoryUI()
     {
         if (!showContentsCamera)
         {
@@ -56,49 +57,61 @@ public class Container : MonoBehaviour
             showContentsCamera.backgroundColor = new Color(0, 0, 0, 1);
             showContentsCamera.transform.position = contentsWorldPos + new Vector3(0, 0, -(showContentsCamera.nearClipPlane + showContentsCamera.farClipPlane) / 2);
         }
-
-        if (Input.GetKeyDown(KeyCode.I))
-            showContentsCamera.gameObject.SetActive(!showContentsCamera.gameObject.activeInHierarchy);
-
-        if (showContentsCamera.gameObject.activeInHierarchy)
+        showContentsCamera.gameObject.SetActive(true);
+    }
+    public void HideInventoryUI()
+    {
+        if (IsInventoryUIShown)
         {
-            var sp = Input.mousePosition;
-            var wp = showContentsCamera.ScreenToWorldPoint(new Vector3(sp.x, sp.y, contentsWorldPos.z - showContentsCamera.transform.position.z));
+            showContentsCamera.gameObject.SetActive(false);
+        }
+    }
+    void Update()
+    {
+        if (IsInventoryUIShown)
+        {
+            TickPlayerTryDropItem();
+        }
+    }
 
-            var pickRadius = 0.5f;
-            var overlaps = Physics2D.OverlapCircleAll(wp, pickRadius);
-            Carryable closest = null;
-            float closestDist = float.MaxValue;
-            foreach (var c2 in overlaps)
+    void TickPlayerTryDropItem()
+    {
+        var sp = Input.mousePosition;
+        var wp = showContentsCamera.ScreenToWorldPoint(new Vector3(sp.x, sp.y, contentsWorldPos.z - showContentsCamera.transform.position.z));
+
+        var pickRadius = 0.5f;
+        var overlaps = Physics2D.OverlapCircleAll(wp, pickRadius);
+        Carryable closest = null;
+        float closestDist = float.MaxValue;
+        foreach (var c2 in overlaps)
+        {
+            Transform p = c2.transform;
+            Carryable carryable = null;
+            while (p != null)
             {
-                Transform p = c2.transform;
-                Carryable carryable = null;
-                while (p != null)
-                {
-                    carryable = p.GetComponent<Carryable>();
-                    if (carryable)
-                        break;
-                    p = p.parent;
-                }
-                if (!carryable)
-                    continue;
-                if (FindItem(carryable) == null)
-                    continue;
-                var d = Vector3.Distance(carryable.transform.position, wp);
-                if (d > closestDist)
-                    continue;
-
-                closestDist = d;
-                closest = carryable;
+                carryable = p.GetComponent<Carryable>();
+                if (carryable)
+                    break;
+                p = p.parent;
             }
+            if (!carryable)
+                continue;
+            if (FindItem(carryable) == null)
+                continue;
+            var d = Vector3.Distance(carryable.transform.position, wp);
+            if (d > closestDist)
+                continue;
 
-            if (closest)
+            closestDist = d;
+            closest = carryable;
+        }
+
+        if (closest)
+        {
+            HighlightSprite.Highlight(closest.gameObject, Color.black);
+            if (Input.GetMouseButtonDown(0))
             {
-                HighlightSprite.Highlight(closest.gameObject, Color.black);
-                if (Input.GetMouseButtonDown(0))
-                {
-                    RemoveItem(closest);
-                }
+                RemoveItem(closest);
             }
         }
     }
@@ -115,7 +128,7 @@ public class Container : MonoBehaviour
         currentItemsVolume -= hovered.volume;
 
         hovered.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
-        Sounds.PlayAudio(hovered.transform, Sounds.ID.SwooshThrowingObject);
+        Sounds.PlayAudio(hovered.transform, Sounds.ID.DropItem(hovered.semanticMaterial));
     }
 
 

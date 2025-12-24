@@ -55,128 +55,144 @@ public class Merchant : MonoBehaviour
             Input.GetKey(KeyCode.Space) ||
             Input.GetKey(KeyCode.Return);
 
+        bool openInventory_wasJustPressed =
+            Input.GetKeyDown(KeyCode.I);
+
         var canCarry = GetComponent<CanCarry>();
+        var container = GetComponent<Container>();
 
-        var bounds = Utils.GetBounds(gameObject);
-        var mousePosition = Input.mousePosition;
-        timeSinceLastMouseMove += Time.deltaTime;
-        if (mousePosition != lastMousePosition)
-            timeSinceLastMouseMove = 0;
-        lastMousePosition = mousePosition;
-        var carryPoint = bounds.center;
-        if (timeSinceLastMouseMove < 2f)
+        if (container && openInventory_wasJustPressed)
         {
-            var offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane), Camera.MonoOrStereoscopicEye.Mono) - carryPoint;
-            offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
-            carryPoint += offset;
-        }
-        var overlaps = Physics2D.OverlapBoxAll(carryPoint, bounds.size, 0);
-
-        Cart couldMoveCart = null;
-        if (!movingCart && !canCarry.IsCarryingAnything)
-        {
-            foreach (var c in overlaps)
-            {
-                Transform p = c.transform;
-                while (p.parent)
-                    p = p.parent;
-                var cart = p.GetComponent<Cart>();
-                if (cart && cart.canBeMoved)
-                {
-                    couldMoveCart = cart;
-                    break;
-                }
-            }
-        }
-
-        Carryable couldCarry = null;
-        float closestCarryableDistance = float.MaxValue;
-        if (!movingCart && !canCarry.IsCarryingAnything)
-        {
-            foreach (var c in overlaps)
-            {
-                Transform p = c.transform;
-
-                var carryable = p.GetComponent<Carryable>();
-                while (!carryable && p.parent)
-                {
-                    p = p.parent;
-                    p.GetComponent<Carryable>();
-                }
-                if (!carryable)
-                    continue;
-                var d = Vector3.Distance(carryable.transform.position, carryPoint);
-                if (d < closestCarryableDistance && carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
-                {
-                    closestCarryableDistance = d;
-                    couldCarry = carryable;
-                }
-            }
-        }
-
-        if (couldMoveCart)
-        {
-            HighlightSprite.Highlight(couldMoveCart.gameObject);
-        }
-        else if (couldCarry)
-        {
-            HighlightSprite.Highlight(couldCarry.gameObject);
-        }
-
-        if (wantsToMoveCartOrCarry_isDown)
-        {
-            if (couldMoveCart)
-            {
-                couldMoveCart.wantsToMoveForward = true;
-                movingCart = couldMoveCart;
-            }
-            else if (couldCarry)
-            {
-                GetComponent<Relationship>()?.AdjustLovedBy(couldCarry.GetComponent<Relationship>(), 1);
-                var c = GetComponent<Container>();
-                if (c.CanAdd(couldCarry) && couldCarry.volume < 0.05f)
-                {
-                    if (wantsToMoveCartOrCarry_wasJustPressed)
-                    {
-                        c.AddItem(couldCarry);
-                        var s = Sounds.PlayAudio(couldCarry.transform, Sounds.ID.CollectCoin);
-                        s.pitch = Mathf.Clamp(1 + Random.Range(-0.1f, 0.1f) - couldCarry.volume * 0.2f, 0.3f, 1.2f);
-                    }
-                }
-                else
-                {
-                    canCarry.ForceStartCarrying(couldCarry);
-                }
-                couldCarry.wasEverPickedByPlayer = true;
-            }
+            // container interactions
+            if (container.IsInventoryUIShown)
+                container.HideInventoryUI();
+            else
+                container.ShowInventoryUI();
         }
         else
         {
-            if (canCarry.IsCarryingAnything)
+            // character interactions with world
+            var bounds = Utils.GetBounds(gameObject);
+            var mousePosition = Input.mousePosition;
+            timeSinceLastMouseMove += Time.deltaTime;
+            if (mousePosition != lastMousePosition)
+                timeSinceLastMouseMove = 0;
+            lastMousePosition = mousePosition;
+            var carryPoint = bounds.center;
+            if (timeSinceLastMouseMove < 2f)
             {
-                var addToCart = new List<Carryable>();
-                foreach (var c in canCarry.carrying)
+                var offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane), Camera.MonoOrStereoscopicEye.Mono) - carryPoint;
+                offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
+                carryPoint += offset;
+            }
+            var overlaps = Physics2D.OverlapBoxAll(carryPoint, bounds.size, 0);
+
+            Cart couldMoveCart = null;
+            if (!movingCart && !canCarry.IsCarryingAnything)
+            {
+                foreach (var c in overlaps)
                 {
-                    if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
+                    Transform p = c.transform;
+                    while (p.parent)
+                        p = p.parent;
+                    var cart = p.GetComponent<Cart>();
+                    if (cart && cart.canBeMoved)
                     {
-                        addToCart.Add(c);
+                        couldMoveCart = cart;
+                        break;
                     }
                 }
-                foreach (var c in addToCart)
-                {
-                    var r = c.GetComponent<Relationship>();
-                    if (r)
-                        GetComponent<Relationship>().AdjustLovedBy(r, 1);
-                    Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
-                    c.wasEverInCart = true;
-                }
-                canCarry.StopCarrying();
             }
 
-            if (movingCart)
+            Carryable couldCarry = null;
+            float closestCarryableDistance = float.MaxValue;
+            if (!movingCart && !canCarry.IsCarryingAnything)
             {
-                movingCart.wantsToMoveForward = false;
-                movingCart = null;
+                foreach (var c in overlaps)
+                {
+                    Transform p = c.transform;
+
+                    var carryable = p.GetComponent<Carryable>();
+                    while (!carryable && p.parent)
+                    {
+                        p = p.parent;
+                        p.GetComponent<Carryable>();
+                    }
+                    if (!carryable)
+                        continue;
+                    var d = Vector3.Distance(carryable.transform.position, carryPoint);
+                    if (d < closestCarryableDistance && carryable && carryable.canBeCarried && carryable.isBeingCarriedBy == null)
+                    {
+                        closestCarryableDistance = d;
+                        couldCarry = carryable;
+                    }
+                }
+            }
+
+            if (couldMoveCart)
+            {
+                HighlightSprite.Highlight(couldMoveCart.gameObject);
+            }
+            else if (couldCarry)
+            {
+                HighlightSprite.Highlight(couldCarry.gameObject);
+            }
+
+            if (wantsToMoveCartOrCarry_isDown)
+            {
+                if (couldMoveCart)
+                {
+                    couldMoveCart.wantsToMoveForward = true;
+                    movingCart = couldMoveCart;
+                }
+                else if (couldCarry)
+                {
+                    GetComponent<Relationship>()?.AdjustLovedBy(couldCarry.GetComponent<Relationship>(), 1);
+                    var c = GetComponent<Container>();
+                    if (c.CanAdd(couldCarry) && couldCarry.volume < 0.05f)
+                    {
+                        if (wantsToMoveCartOrCarry_wasJustPressed)
+                        {
+                            c.AddItem(couldCarry);
+                            var s = Sounds.PlayAudio(couldCarry.transform, Sounds.ID.CollectCoin);
+                            s.pitch = Mathf.Clamp(1 + Random.Range(-0.1f, 0.1f) - couldCarry.volume * 0.2f, 0.3f, 1.2f);
+                        }
+                    }
+                    else
+                    {
+                        canCarry.ForceStartCarrying(couldCarry);
+                    }
+                    couldCarry.wasEverPickedByPlayer = true;
+                }
+            }
+            else
+            {
+                if (canCarry.IsCarryingAnything)
+                {
+                    var addToCart = new List<Carryable>();
+                    foreach (var c in canCarry.carrying)
+                    {
+                        if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
+                        {
+                            addToCart.Add(c);
+                        }
+                    }
+                    foreach (var c in addToCart)
+                    {
+                        var r = c.GetComponent<Relationship>();
+                        if (r)
+                            GetComponent<Relationship>().AdjustLovedBy(r, 1);
+                        Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
+                        c.wasEverInCart = true;
+                    }
+                    canCarry.StopCarrying();
+                }
+
+                if (movingCart)
+                {
+                    movingCart.wantsToMoveForward = false;
+                    movingCart = null;
+                }
             }
         }
 

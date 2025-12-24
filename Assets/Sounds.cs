@@ -16,6 +16,24 @@ public static class Sounds
         public const string SwooshThrowingObject = "Sounds/SwooshThrowingObject";
         public const string HitFlesh = "Sounds/Hit/Flesh";
         public const string CollectCoin = "Sounds/Collect/Coin";
+        public static string DropItem(SemanticMaterial material)
+        {
+            return material switch
+            {
+                SemanticMaterial.Wood => "Sounds/DropItem/Wood",
+                SemanticMaterial.Metal => Random.Range(0, 2) == 0 ? "Sounds/DropItem/Metal" : "Sounds/DropItem/Metal2",
+                SemanticMaterial.Flesh => "Sounds/DropItem/Flesh",
+                SemanticMaterial.Stone => "Sounds/DropItem/Stone",
+                SemanticMaterial.Leather => "Sounds/DropItem/Leather",
+                SemanticMaterial.Glass => "Sounds/DropItem/Glass",
+                _ => "Sounds/DropItem/Wood",
+            };
+        }
+
+        internal static string DropItem(object semanticMaterial)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     public static AudioSource PlayAudio(string resourcePath, float randomPitchRange = 0f)
     {

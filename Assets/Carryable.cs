@@ -10,9 +10,10 @@ public class Carryable : MonoBehaviour
     public bool onlyAllowCarryingWhenDead = false;
     public CanCarry isBeingCarriedBy;
     public float volume;
+    public SemanticMaterial semanticMaterial;
 
     static Dictionary<Sprite, uint> pixelsCache = new();
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
