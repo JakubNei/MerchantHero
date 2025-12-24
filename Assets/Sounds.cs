@@ -15,7 +15,7 @@ public static class Sounds
     {
         public const string SwooshThrowingObject = "Sounds/SwooshThrowingObject";
         public const string HitFlesh = "Sounds/Hit/Flesh";
-        public const string CollectCoin = "Sounds/CollectCoin";
+        public const string CollectCoin = "Sounds/Collect/Coin";
     }
     public static AudioSource PlayAudio(string resourcePath, float randomPitchRange = 0f)
     {
