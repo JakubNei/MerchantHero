@@ -117,12 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213b6f5bcae4ec143addf7a20937a51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carryable
-  price: 0
   wasEverPickedByPlayer: 0
   wasEverInCart: 0
   canBeCarried: 1
   onlyAllowCarryingWhenDead: 0
   isBeingCarriedBy: {fileID: 0}
+  volume: 0
+  semanticMaterial: 0
 --- !u!60 &-8098172565731844578
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

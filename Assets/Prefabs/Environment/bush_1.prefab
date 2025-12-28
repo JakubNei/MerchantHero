@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 345913786637717867}
   - component: {fileID: -8701024531144191363}
   - component: {fileID: -2267053773092725209}
+  - component: {fileID: -1672219284093238281}
   m_Layer: 0
   m_Name: bush_1
   m_TagString: Untagged
@@ -54,6 +55,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,6 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -113,3 +117,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f94f39b75e970e40ad4eccf05718a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &-1672219284093238281
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3542475853775983456}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5059799, y: 0.0053350274}
+    oldSize: {x: 0.4, y: 0.44}
+    newSize: {x: 0.4, y: 0.44}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.012391968, y: 0.047652587}
+      - {x: -0.0023919677, y: 0.017652588}
+      - {x: 0.05760803, y: 0.017652588}
+      - {x: 0.077608034, y: 0.037652586}
+      - {x: 0.06760803, y: 0.06765258}
+      - {x: 0.007608032, y: 0.06765258}
+    - - {x: 0.12760803, y: 0.41765258}
+      - {x: 0.017608032, y: 0.41765258}
+      - {x: -0.13239196, y: 0.24765258}
+      - {x: -0.13239196, y: 0.14765258}
+      - {x: -0.09239197, y: 0.10765258}
+      - {x: -0.052391965, y: 0.08765259}
+      - {x: 0.047608033, y: 0.08765259}
+      - {x: 0.15760803, y: 0.10765258}
+      - {x: 0.19760802, y: 0.16765258}
+      - {x: 0.19760802, y: 0.25765258}
+      - {x: 0.15760803, y: 0.39765257}
+  m_UseDelaunayMesh: 0

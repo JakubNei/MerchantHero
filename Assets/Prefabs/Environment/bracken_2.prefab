@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7038859079163472731}
   - component: {fileID: 2382216630126864872}
   - component: {fileID: -1202334623049520146}
+  - component: {fileID: -3437954630596339779}
   m_Layer: 0
   m_Name: bracken_2
   m_TagString: Untagged
@@ -53,6 +54,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,6 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -100,3 +104,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f94f39b75e970e40ad4eccf05718a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &-3437954630596339779
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206882921773614021}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5000013, y: 0.048828125}
+    oldSize: {x: 0.46, y: 0.27}
+    newSize: {x: 0.46, y: 0.27}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.13999939, y: 0.2568164}
+      - {x: 0.019999389, y: 0.2568164}
+      - {x: -0.11000061, y: 0.2368164}
+      - {x: -0.1500006, y: 0.2168164}
+      - {x: -0.11000061, y: 0.1468164}
+      - {x: -0.1600006, y: 0.1268164}
+      - {x: -0.2000006, y: 0.1068164}
+      - {x: -0.22000061, y: 0.08681641}
+      - {x: -0.22000061, y: 0.046816405}
+      - {x: -0.1500006, y: 0.026816405}
+      - {x: -0.09000061, y: -0.013183594}
+      - {x: 0.04999939, y: -0.013183594}
+      - {x: 0.10999939, y: 0.016816406}
+      - {x: 0.17999938, y: 0.026816405}
+      - {x: 0.18999939, y: 0.056816407}
+      - {x: 0.18999939, y: 0.1168164}
+  m_UseDelaunayMesh: 0

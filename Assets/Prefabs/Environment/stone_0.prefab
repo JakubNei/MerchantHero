@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1802651416268102033}
   - component: {fileID: -3316213668977871285}
   - component: {fileID: -4288632888577860362}
+  - component: {fileID: 9103276130064245945}
   m_Layer: 0
   m_Name: stone_0
   m_TagString: Untagged
@@ -104,12 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213b6f5bcae4ec143addf7a20937a51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carryable
-  price: 0
   wasEverPickedByPlayer: 0
   wasEverInCart: 0
   canBeCarried: 1
   onlyAllowCarryingWhenDead: 0
   isBeingCarriedBy: {fileID: 0}
+  volume: 0
+  semanticMaterial: 0
 --- !u!60 &-4288632888577860362
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -141,6 +143,59 @@ PolygonCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.48023987, y: 0.12882857}
+    oldSize: {x: 0.2, y: 0.11}
+    newSize: {x: 0.2, y: 0.11}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.033781216, y: 0.045572586}
+      - {x: -0.077710845, y: 0.038408563}
+      - {x: -0.096047975, y: 0.015828857}
+      - {x: -0.06687935, y: -0.005919356}
+      - {x: 0.03570036, y: 0.0023323111}
+      - {x: 0.05928237, y: 0.03382425}
+  m_UseDelaunayMesh: 0
+--- !u!60 &9103276130064245945
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403728755597793609}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
