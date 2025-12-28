@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // character interactions with world
-            var bounds = Utils.GetBounds(gameObject);
+            var bounds = Utils.GetAllSpriteRendererBounds(gameObject);
             var mousePosition = Input.mousePosition;
             timeSinceLastMouseMove += Time.deltaTime;
             if (mousePosition != lastMousePosition)

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
 public class Carryable : MonoBehaviour
 {
     public bool wasEverPickedByPlayer = false;

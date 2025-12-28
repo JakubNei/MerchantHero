@@ -137,22 +137,7 @@ public class Killable : MonoBehaviour
     
     Bounds GetBounds()
     {
-        bool f = true;
-        Bounds b = new Bounds();
-        foreach (var s in GetComponentsInChildren<SpriteRenderer>())
-        {
-            if (f)
-            {
-                b = s.bounds;
-                f = false;
-            }
-            else
-            {
-                b.Encapsulate(s.bounds);
-            }
-        }
-
-        return b;
+        return Utils.GetAllSpriteRendererBounds(gameObject);
     }
 
     void Die()
@@ -171,7 +156,9 @@ public class Killable : MonoBehaviour
             canCarry.enabled = false;
 
         isDead = true;
-        hatedByLeft = GetComponent<Relationship>().TotalHatedBy;
+        var h = GetComponent<Relationship>();
+        if (h)
+            hatedByLeft = h.TotalHatedBy;
 
         SpawnBlood(BloodSource.Death);
 

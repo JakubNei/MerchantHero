@@ -3,7 +3,7 @@ using UnityEngine;
 public static class Utils
 {
 
-    public static Bounds GetBounds(GameObject go)
+    public static Bounds GetAllSpriteRendererBounds(GameObject go)
     {
         bool f = true;
         Bounds b = new Bounds();

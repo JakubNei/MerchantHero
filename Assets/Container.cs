@@ -25,7 +25,7 @@ public class Container : MonoBehaviour
         var item = new ItemData
         {
             item = c,
-            worldBoundsSize = Utils.GetBounds(c.gameObject).size
+            worldBoundsSize = Utils.GetAllSpriteRendererBounds(c.gameObject).size
         };
         c.transform.position = contentsWorldPos + new Vector3(
             UnityEngine.Random.Range(-0.5f, 0.5f),
