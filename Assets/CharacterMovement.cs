@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class CharacterMovement : MonoBehaviour
 {
     public Vector3 movementVector = Vector3.zero;
@@ -15,7 +16,16 @@ public class CharacterMovement : MonoBehaviour
     public bool flippedHorizontally = false;
 
     public Vector3 PositionWithouOffset => new Vector3(transform.position.x, transform.position.y - targetUpDownOffset, transform.position.z);
+    private Rigidbody2D rb;
 
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.freezeRotation = true;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.linearDamping = 0.9f;
+    }
 
     void Update()
     {
@@ -43,13 +53,12 @@ public class CharacterMovement : MonoBehaviour
         s.x = flippedHorizontally ? -1 : 1;
         this.transform.localScale = s;
 
-
         var m = movementVector * moveSpeed * Time.deltaTime;
 
         m.y += targetUpDownOffset - lastTargetUpDownOffset;
         lastTargetUpDownOffset = targetUpDownOffset;
 
-        transform.position = transform.position + m;
+        rb.MovePosition(transform.position + m);
     }
 
     void OnDisable()

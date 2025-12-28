@@ -14754,7 +14754,7 @@ GameObject:
   - component: {fileID: 1931637567}
   - component: {fileID: 1931637566}
   m_Layer: 0
-  m_Name: Building1
+  m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14806,10 +14806,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.7649125, y: 0.08505404}
-      - {x: -0.69958377, y: 1.5811658}
-      - {x: 1.967967, y: 1.5911021}
-      - {x: 1.2912021, y: 0.17991018}
+    - - {x: -1.721213, y: 0.4696089}
+      - {x: -1.5938512, y: 0.64169216}
+      - {x: -1.5774313, y: 0.6638775}
+      - {x: -0.7432829, y: 1.7909226}
+      - {x: 2.0641055, y: 1.8008599}
+      - {x: 1.3698609, y: 0.5032859}
   m_UseDelaunayMesh: 0
 --- !u!114 &1931637567
 MonoBehaviour:
@@ -16566,6 +16568,14 @@ PrefabInstance:
     - target: {fileID: 4034575543385126918, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358649463805512439, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358649463805512439, guid: de58985ce781e37489b93aa3bc3a748b, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
