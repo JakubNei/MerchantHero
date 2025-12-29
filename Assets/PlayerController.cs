@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Sword sword;
     public float timeSinceLastMouseMove;
     public Vector3 lastMousePosition;
+    public bool showMap;
+    public Container showingContents;
 
     Vector3 offsetFromCart;
     void Awake()
@@ -29,6 +31,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        bool shouldShowMap_wasJustPressed = Input.GetKeyDown(KeyCode.M);
+        if (shouldShowMap_wasJustPressed)
+        {
+            showMap = !showMap;
+            if (showMap && showingContents)
+            {
+                showingContents.HideInventoryUI();
+                showingContents = null;
+            }
+        }
+
+
         if (!controlling)
             return;
         if (controlling.GetComponent<Killable>()?.isDead ?? false)
@@ -73,9 +87,15 @@ public class PlayerController : MonoBehaviour
         {
             // container interactions
             if (container.IsInventoryUIShown)
+            {
                 container.HideInventoryUI();
+                showingContents = null;
+            }
             else
+            {
                 container.ShowInventoryUI();
+                showingContents = container;
+            }
         }
         else
         {
@@ -139,11 +159,11 @@ public class PlayerController : MonoBehaviour
 
             if (couldMoveCart)
             {
-                HighlightSprite.Highlight(couldMoveCart.gameObject);
+                HighlightSprite.Highlight(couldMoveCart.gameObject, Color.gray);
             }
             else if (couldCarry)
             {
-                HighlightSprite.Highlight(couldCarry.gameObject);
+                HighlightSprite.Highlight(couldCarry.gameObject, Color.black);
             }
 
             if (wantsToMoveCartOrCarry_isDown)
@@ -238,6 +258,12 @@ public class PlayerController : MonoBehaviour
             p.x = position.x;
             p.y = position.y;
             Camera.main.transform.position = p;
+        }
+        {
+            var o = Camera.main.orthographicSize;
+            var t = showMap ? 20 : 3;
+            o = Mathf.MoveTowards(o, t, Time.deltaTime * 20);
+            Camera.main.orthographicSize = o;
         }
     }
 

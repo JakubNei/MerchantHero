@@ -24,7 +24,7 @@ public class CharacterMovement : MonoBehaviour
         rb.gravityScale = 0;
         rb.freezeRotation = true;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.linearDamping = 0.9f;
+        rb.linearDamping = 10f;
     }
 
     void Update()
