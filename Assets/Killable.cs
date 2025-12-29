@@ -151,7 +151,7 @@ public class Killable : MonoBehaviour
     {
         if (hatedByLeft <= 0)
             return;
-        hatedByLeft -= 1;
+        hatedByLeft -= 0.3f;
         GameObject prefabBloodPickup = Resources.Load<GameObject>("BloodPickup");
         var bounds = GetBounds();
         GameObject.Instantiate(prefabBloodPickup, bounds.center, Quaternion.identity);
@@ -180,7 +180,7 @@ public class Killable : MonoBehaviour
         isDead = true;
         var h = GetComponent<Relationship>();
         if (h)
-            hatedByLeft = h.TotalHatedBy;
+            hatedByLeft = h.totalHatedBy;
 
         SpawnBlood(BloodSource.Death);
 

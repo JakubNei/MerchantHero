@@ -56,7 +56,7 @@ public class DevilController : MonoBehaviour
                 {
                     var d = Vector3.Distance(item.transform.position, this.transform.position);
                     var r = item.GetComponent<Relationship>();
-                    var w = d + (r ? r.TotalLovedBy * 0.1f : 0);
+                    var w = d + (r ? r.totalLovedBy * 0.1f : 0);
                     if (w < closestWeight)
                     {
                         closestWeight = w;

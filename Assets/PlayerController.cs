@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public GameObject controlling;
     public static PlayerController I => FindAnyObjectByType<PlayerController>();
     public Cart movingCart;
-    public Sword sword;
     public float timeSinceLastMouseMove;
     public Vector3 lastMousePosition;
     public bool showMap;
@@ -185,7 +184,6 @@ public class PlayerController : MonoBehaviour
                     {
                         canCarry.ForceStartCarrying(couldCarry);
                     }
-                    couldCarry.wasEverPickedByPlayer = true;
                 }
             }
             else
@@ -206,7 +204,6 @@ public class PlayerController : MonoBehaviour
                         if (r)
                             controlling.GetComponent<Relationship>().AdjustLovedBy(r, 1);
                         Cart.I.GetComponent<CanCarry>().ForceStartCarrying(c);
-                        c.wasEverInCart = true;
                     }
                     canCarry.StopCarrying();
                 }
@@ -219,6 +216,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+        Sword sword = null;
         if (sword)
         {
             sword.Tick(wantsToSlash_isDown);
@@ -257,7 +256,7 @@ public class PlayerController : MonoBehaviour
         {
             var o = Camera.main.orthographicSize;
             var t = showMap ? 20 : 3;
-            o = Mathf.MoveTowards(o, t, Time.deltaTime * 20);
+            o = Mathf.MoveTowards(o, t, Time.deltaTime * 60);
             Camera.main.orthographicSize = o;
         }
     }

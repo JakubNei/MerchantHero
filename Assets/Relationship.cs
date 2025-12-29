@@ -11,10 +11,10 @@ public class Relationship : MonoBehaviour
         public float lovedBy;
     }
     public Dictionary<Relationship, RelationshipData> relationships = new();
-    public float TotalLoves { get; private set; }
-    public float TotalHates { get; private set; }
-    public float TotalLovedBy { get; private set; }
-    public float TotalHatedBy { get; private set; }
+    public float totalLoves;
+    public float totalHates;
+    public float totalLovedBy;
+    public float totalHatedBy;
 
     public float LovedBy(GameObject go)
     {
@@ -45,12 +45,12 @@ public class Relationship : MonoBehaviour
         if (!target)
             return;
         GetRelationshipData(target, out var data);
-        TotalLoves += amount;
+        totalLoves += amount;
         data.loves += amount;
         relationships[target] = data;
 
         target.GetRelationshipData(this, out var targetData);
-        target.TotalLovedBy += amount;
+        target.totalLovedBy += amount;
         targetData.lovedBy += amount;
         target.relationships[this] = targetData;
     }
@@ -59,12 +59,12 @@ public class Relationship : MonoBehaviour
         if (!target)
             return;
         GetRelationshipData(target, out var data);
-        TotalHates += amount;
+        totalHates += amount;
         data.hates += amount;
         relationships[target] = data;
 
         target.GetRelationshipData(this, out var targetData);
-        target.TotalHatedBy += amount;
+        target.totalHatedBy += amount;
         targetData.hatedBy += amount;
         target.relationships[this] = targetData;
     }
@@ -73,12 +73,12 @@ public class Relationship : MonoBehaviour
         if (!target)
             return;
         GetRelationshipData(target, out var data);
-        TotalLovedBy += amount;
+        totalLovedBy += amount;
         data.lovedBy += amount;
         relationships[target] = data;
 
         target.GetRelationshipData(this, out var targetData);
-        target.TotalLoves += amount;
+        target.totalLoves += amount;
         targetData.loves += amount;
         target.relationships[this] = targetData;
     }
@@ -87,12 +87,12 @@ public class Relationship : MonoBehaviour
         if (!target)
             return;
         GetRelationshipData(target, out var data);
-        TotalHatedBy += amount;
+        totalHatedBy += amount;
         data.hatedBy += amount;
         relationships[target] = data;
 
         target.GetRelationshipData(this, out var targetData);
-        target.TotalHates += amount;
+        target.totalHates += amount;
         targetData.hates += amount;
         target.relationships[this] = targetData;
     }

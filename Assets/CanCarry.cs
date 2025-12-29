@@ -11,6 +11,9 @@ public class CanCarry : MonoBehaviour
     }
 
     public Transform positionCarryObject;
+    public Transform positionLeftHand;
+    public Transform positionRightHand;
+
     public bool parentToThisOnCarryStart = false;
     public List<CarriedItem> carrying = new();
     public bool IsCarryingAnything => carrying.Count > 0;

@@ -19,7 +19,7 @@ public class DevilManager : MonoBehaviour
         foreach (var item in FindObjectsByType<Carryable>(FindObjectsSortMode.None))
         {
             var r = item.GetComponent<Relationship>();
-            if (item.canBeCarried && r && r.TotalLovedBy > 0 && (item.wasEverInCart || item.wasEverPickedByPlayer))
+            if (item.canBeCarried && r && r.totalLovedBy > 0)
             {
                 if (item.isBeingCarriedBy == null)
                 {

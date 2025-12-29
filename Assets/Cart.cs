@@ -21,7 +21,6 @@ public class Cart : MonoBehaviour
         foreach (var item in GetComponentsInChildren<Carryable>())
         {
             canCarry.ForceStartCarrying(item);
-            item.wasEverInCart = true;
             // so devils are attracted to default items
             PlayerController.I.controlling?.GetComponent<Relationship>()?.AdjustLoves(item.GetComponent<Relationship>(), 1);
         }

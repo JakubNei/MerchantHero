@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Relationship))] // so devils can steal it
 public class Carryable : MonoBehaviour
 {
-    public bool wasEverPickedByPlayer = false;
-    public bool wasEverInCart = false;
     public bool canBeCarried = true;
     public bool onlyAllowCarryingWhenDead = false;
     public CanCarry isBeingCarriedBy;
