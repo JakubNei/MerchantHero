@@ -15,7 +15,8 @@ public class Killable : MonoBehaviour
     public bool isDead = false;
 
     public Vector3 lastPositonWhenDead;
-
+    public Color bloodColor = Color.red;
+    public bool rainbowBlood = false;
     public event System.Action onDead;
     public event System.Action onGotHit;
     public int bloodMax = 50;
@@ -25,9 +26,15 @@ public class Killable : MonoBehaviour
     void Start()
     {
         bloodLeft = bloodMax;
+        if (rainbowBlood)
+        {
+            Color.RGBToHSV(bloodColor, out float h, out float s, out float v);
+            h += Random.Range(0f, 1f);
+            h %= 1;
+            bloodColor = Color.HSVToRGB(h, s, v);
+        }
         if (poseDead)
             poseDead.SetActive(false);
-
         if (autoDieOnSpawn)
             Die();
     }
@@ -102,24 +109,39 @@ public class Killable : MonoBehaviour
 
     GameObject SpawnBlood(BloodSource source)
     {
-        GameObject prefabBlood = Resources.Load<GameObject>("Blood");
         var bounds = GetBounds();
+        var b = SpawnBloodInternal(source, bounds);
         var m = Mathf.Max(bounds.size.x, bounds.size.y);
-        var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
-        --bloodLeft;
         b.transform.localScale *= m + Random.Range(0, 1 * m * 0.05f);
-        if (bloodSpawnsPickup && source != BloodSource.Drag)
-            TrySpawnHatePickup();
         return b;
     }
     GameObject SpawnBloodScaledByHitCount(BloodSource source)
     {
-        GameObject prefabBlood = Resources.Load<GameObject>("Blood");
         var bounds = GetBounds();
+        var b = SpawnBloodInternal(source, bounds);
+        var m = Mathf.Max(bounds.size.x, bounds.size.y);
+        b.transform.localScale *= m + Random.Range(0, (1 + Mathf.Min(10, timesHitBySomething)) * m * 0.05f);
+        return b;
+    }
+
+    GameObject SpawnBloodInternal(BloodSource source, Bounds bounds)
+    {
+        GameObject prefabBlood = Resources.Load<GameObject>("Blood");
         var m = Mathf.Max(bounds.size.x, bounds.size.y);
         var b = GameObject.Instantiate(prefabBlood, bounds.center, this.transform.rotation);
+        var bloodComponent = b.GetComponent<Blood>();
+        if (bloodComponent)
+        {
+            if (rainbowBlood)
+            {
+                Color.RGBToHSV(bloodColor, out float h, out float s, out float v);
+                h += 0.1f;
+                h %= 1;
+                bloodColor = Color.HSVToRGB(h, s, v);
+            }
+            bloodComponent.color = bloodColor;
+        }
         --bloodLeft;
-        b.transform.localScale *= m + Random.Range(0, (1 + Mathf.Min(10, timesHitBySomething)) * m * 0.05f);
         if (bloodSpawnsPickup && source != BloodSource.Drag)
             TrySpawnHatePickup();
         return b;
@@ -134,7 +156,7 @@ public class Killable : MonoBehaviour
         var bounds = GetBounds();
         GameObject.Instantiate(prefabBloodPickup, bounds.center, Quaternion.identity);
     }
-    
+
     Bounds GetBounds()
     {
         return Utils.GetAllSpriteRendererBounds(gameObject);
