@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class CanCarry : MonoBehaviour
 {
+    public struct CarriedItem
+    {
+        public Carryable carryable;
+        public Vector3 centerToBoundsOffset;
+    }
+
     public Transform positionCarryObject;
     public bool parentToThisOnCarryStart = false;
-    public List<Carryable> carrying = new();
+    public List<CarriedItem> carrying = new();
     public bool IsCarryingAnything => carrying.Count > 0;
 
     public void ForceStartCarrying(Carryable carryable)
     {
         if (carryable.isBeingCarriedBy)
         {
-            carryable.isBeingCarriedBy.carrying.Remove(carryable);
+            carryable.isBeingCarriedBy.carrying.RemoveAll(item => item.carryable == carryable);
         }
         carryable.isBeingCarriedBy = this;
-        carrying.Add(carryable);
+
+        var bounds = Utils.GetAllSpriteRendererBounds(carryable.gameObject);
+        carrying.Add(new CarriedItem
+        {
+            carryable = carryable,
+            centerToBoundsOffset = carryable.transform.position - bounds.center,
+        });
 
         carryable.gameObject.transform.parent = null;
         if (parentToThisOnCarryStart)
@@ -27,12 +39,12 @@ public class CanCarry : MonoBehaviour
 
     public void StopCarrying()
     {
-        foreach (var c in carrying)
+        foreach (var item in carrying)
         {
-            if (c)
+            if (item.carryable)
             {
-                c.transform.parent = null;
-                c.isBeingCarriedBy = null;
+                item.carryable.transform.parent = null;
+                item.carryable.isBeingCarriedBy = null;
             }
         }
         carrying.Clear();
@@ -42,20 +54,20 @@ public class CanCarry : MonoBehaviour
     {
         if (positionCarryObject)
         {
-            foreach (var c in carrying)
+            foreach (var item in carrying)
             {
-                c.transform.position = this.positionCarryObject.position;
+                item.carryable.transform.position = positionCarryObject.position + item.centerToBoundsOffset;
             }
         }
     }
 
     void OnDisable()
     {
-        foreach (var c in carrying)
+        foreach (var item in carrying)
         {
-            if (c)
+            if (item.carryable)
             {
-                c.isBeingCarriedBy = null;
+                item.carryable.isBeingCarriedBy = null;
             }
         }
         carrying.Clear();

@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // character interactions with world
-            var bounds = Utils.GetAllSpriteRendererBounds(gameObject);
+            var bounds = Utils.GetAllSpriteRendererBounds(controlling);
             var mousePosition = Input.mousePosition;
             timeSinceLastMouseMove += Time.deltaTime;
             if (mousePosition != lastMousePosition)
@@ -113,11 +113,12 @@ public class PlayerController : MonoBehaviour
                 offset = offset.normalized * Mathf.Lerp(0, 2, offset.magnitude / 2.0f);
                 carryPoint += offset;
             }
-            var overlaps = Physics2D.OverlapBoxAll(carryPoint, bounds.size, 0);
 
             Cart couldMoveCart = null;
+            Carryable couldCarry = null;
             if (!movingCart && !canCarry.IsCarryingAnything)
             {
+                var overlaps = Physics2D.OverlapCircleAll(carryPoint, bounds.size.magnitude);
                 foreach (var c in overlaps)
                 {
                     Transform p = c.transform;
@@ -130,16 +131,10 @@ public class PlayerController : MonoBehaviour
                         break;
                     }
                 }
-            }
-
-            Carryable couldCarry = null;
-            float closestCarryableDistance = float.MaxValue;
-            if (!movingCart && !canCarry.IsCarryingAnything)
-            {
+                float closestCarryableDistance = float.MaxValue;
                 foreach (var c in overlaps)
                 {
                     Transform p = c.transform;
-
                     var carryable = p.GetComponent<Carryable>();
                     while (!carryable && p.parent)
                     {
@@ -200,9 +195,9 @@ public class PlayerController : MonoBehaviour
                     var addToCart = new List<Carryable>();
                     foreach (var c in canCarry.carrying)
                     {
-                        if (Vector3.Distance(Cart.I.transform.position, c.transform.position) < 0.5)
+                        if (Vector3.Distance(Cart.I.transform.position, c.carryable.transform.position) < 0.5)
                         {
-                            addToCart.Add(c);
+                            addToCart.Add(c.carryable);
                         }
                     }
                     foreach (var c in addToCart)
