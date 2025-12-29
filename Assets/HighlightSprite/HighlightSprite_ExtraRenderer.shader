@@ -149,16 +149,16 @@ Shader "Sprites/HighlightSprite/ExtraRenderer"
 				fixed bottomPixel2 = SampleSpriteTexture(IN.texcoord + float2(0, 2* -_MainTex_TexelSize.y)).a; 
                 m = max(m, max(max(leftPixel2, upPixel2), max(rightPixel2, bottomPixel2)));
 
-				fixed outline = sprite.a < 0.3 && m > 0.3 ? m : 0; 
+				fixed outline = sprite.a < 0.3 && m > 0.3 ? m * 2 : 0; 
                 
                 float4 outlineColor = _OutlineColor;
                 outlineColor.rgb *= outlineColor.a;
                 
-                sprite.rgb = _InsideColorOverlay.rgb * _InsideColorOverlay.a * sprite.a;
-                sprite.a *= _InsideColorOverlay.a;
+                //sprite.rgb = _InsideColorOverlay.rgb * _InsideColorOverlay.a * sprite.a;
+                //sprite.a *= _InsideColorOverlay.a;
                 //sprite.rgb = lerp(sprite.rgb,  _InsideColorOverlay * (sprite.a > 0.1 ? 1 : 0), _InsideColorOverlay.a);
 
-                return lerp(sprite, outlineColor, outline);
+                return lerp(0, outlineColor, outline);
 
                 // one pixel inner lerp smooth line
 				// fixed leftPixel = SampleSpriteTexture(IN.texcoord + float2(-_MainTex_TexelSize.x, 0)).a;

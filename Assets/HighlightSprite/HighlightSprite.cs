@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class HighlightSprite : MonoBehaviour
 {
-    class RevertData
+    class CurrentlyHighlighted
     {
-        public Material originalMaterial;
         public SpriteRenderer outlineSpriteRenderer;
-        public double timeWhenToRevent;
+        public float timeLeftToRevert;
     }
 
-    Dictionary<SpriteRenderer, RevertData> revertData = new();
+    Dictionary<SpriteRenderer, CurrentlyHighlighted> currentlyHighlighted = new();
 
-    Material extraRendererMaterial;
+    Material outlineRendererMaterial;
 
     static HighlightSprite instance;
     static HighlightSprite Instance
@@ -53,28 +52,30 @@ public class HighlightSprite : MonoBehaviour
 
     void HighlightInternal(SpriteRenderer spriteRenderer, Color outlineColor)
     {
+        var goName = "Outline";
         if (spriteRenderer.sortingLayerName == "UI")
             return;
-        if (spriteRenderer.sharedMaterial.name == extraRendererMaterial.name)
+        if (spriteRenderer.gameObject.name == goName)
             return;
-        RevertData toRevert;
-        if (!revertData.TryGetValue(spriteRenderer, out toRevert))
+        CurrentlyHighlighted c;
+        var colorName = "_OutlineColor";
+        if (!currentlyHighlighted.TryGetValue(spriteRenderer, out c))
         {
-            toRevert = new RevertData();
-            toRevert.originalMaterial = spriteRenderer.material;
-            var go = new GameObject("Outline");
+            c = new CurrentlyHighlighted();
+            var go = new GameObject(goName);
             go.transform.parent = spriteRenderer.transform;
             go.transform.localPosition = Vector3.zero;
             go.transform.localRotation = Quaternion.identity;
             go.transform.localScale = Vector3.one;
-            toRevert.outlineSpriteRenderer = go.AddComponent<SpriteRenderer>();
-            toRevert.outlineSpriteRenderer.material = extraRendererMaterial;
-            revertData.Add(spriteRenderer, toRevert);
+            c.outlineSpriteRenderer = go.AddComponent<SpriteRenderer>();
+            CopyProperties(c.outlineSpriteRenderer, spriteRenderer);
+            currentlyHighlighted.Add(spriteRenderer, c);
+            c.outlineSpriteRenderer.material = outlineRendererMaterial;
+            c.outlineSpriteRenderer.material.SetColor(colorName, outlineColor);
         }
-
-        toRevert.outlineSpriteRenderer.material.SetColor("_OutlineColor", outlineColor);
-        toRevert.timeWhenToRevent = Time.realtimeSinceStartupAsDouble + 0.1;
-        CopyProperties(toRevert.outlineSpriteRenderer, spriteRenderer);
+        if (c.outlineSpriteRenderer.material.GetColor(colorName) != outlineColor)
+            c.outlineSpriteRenderer.material.SetColor(colorName, outlineColor);
+        c.timeLeftToRevert = 0.1f;
     }
 
     static void CopyProperties(SpriteRenderer to, SpriteRenderer from)
@@ -101,27 +102,26 @@ public class HighlightSprite : MonoBehaviour
 
     void LoadResources()
     {
-        if (!extraRendererMaterial)
-            extraRendererMaterial = Resources.Load<Material>("HighlightSprite_ExtraRenderer");
-}
+        if (!outlineRendererMaterial)
+            outlineRendererMaterial = Resources.Load<Material>("HighlightSprite_ExtraRenderer");
+    }
     List<SpriteRenderer> toRevertNow = new();
     void Update()
     {
         toRevertNow.Clear();
-        var timeNow = Time.realtimeSinceStartupAsDouble;
-        foreach (var pair in revertData)
+        var t = Time.deltaTime;
+        foreach (var pair in currentlyHighlighted)
         {
-            if (pair.Value.timeWhenToRevent <= timeNow)
+            pair.Value.timeLeftToRevert -= t;
+            if (pair.Value.timeLeftToRevert <= 0)
             {
                 toRevertNow.Add(pair.Key);
             }
         }
         foreach (var spriteRenderer in toRevertNow)
         {
-            var revertDataNow = revertData[spriteRenderer];
-            revertData.Remove(spriteRenderer);
-            if (spriteRenderer)
-                spriteRenderer.material = revertDataNow.originalMaterial;
+            var revertDataNow = currentlyHighlighted[spriteRenderer];
+            currentlyHighlighted.Remove(spriteRenderer);
             if (revertDataNow.outlineSpriteRenderer && revertDataNow.outlineSpriteRenderer.gameObject)
                 Destroy(revertDataNow.outlineSpriteRenderer.gameObject);
         }
